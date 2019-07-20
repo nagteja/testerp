@@ -1,0 +1,166 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .stage-wrap{
+        padding-left: 25px !important;
+    }
+    input[type="email"], input[type="date"], input[type="file"]{
+        background-color: #fff !important;
+        border:1px solid #ccc !important;
+    }
+    input{
+        background-color: #fff !important;
+    }
+    .fb-autocomplete{
+        border:1px solid #ccc !important;
+        border-radius:5px;
+    }
+</style>
+
+<script src="{% static 'formbuilder/jquery.min.js' %}"></script>
+<script src="{% static 'formbuilder/form-builder.min.js' %}"></script>       
+    <div class="breadcrumbs-area">
+        <h3>All Subjects</h3>
+        <ul>
+            <li>
+                <a href="../../../dashboard">Home</a>
+            </li>
+            <li>Create Enquiry Form</li>
+        </ul>
+    </div>
+    <form action="/module/create/{{module.module}}/" id="form" method="POST">
+        {% csrf_token %}
+        <div id="formname_div">
+            <input type="hidden" name="formname" id="form_name" value= "{{questions.form_name}}" placeholder="Form Name" required> <br><br>
+        </div>
+        <div class="page-1" id="fb-editor"></div>      
+        <div class="setDataWrap"> </div>
+        <div id="build-wrap"></div>
+
+        </ul>
+        <br>
+        <input type="hidden" name="form_details" id="form_details">
+        <button class="btn btn-success" type="submit" name="getJSON" id="getJSON" style="width: 100px;">Save</button>
+        <p><strong>Revision:</strong> {{ questions.revision }}</p> 
+    </form>
+        <script>
+            jQuery(function($) {
+                var fbEditor = document.getElementById('build-wrap');
+                var edit_form = {{ questions.form_field|safe }};
+                var options = {
+                        scrollToFieldOnAdd: true,
+                        disableFields: ['button','hidden', 'paragraph'],
+                        controlPosition: 'left',
+                        disabledActionButtons: ['data', 'clear', 'save'],
+                       //editOnAdd: false,
+                        controlOrder: [ 'header','autocomplete','text', 'textarea', 'date', 'radio-group', 'file', 'select', 'checkbox-group', 'number',],                       
+                        stickyControls: {    
+                                            enable: true,
+                                            offset: {
+                                                    position: 'fixed',
+                                                    top: 40,
+                                                    width:280,
+
+                                                    }
+                                        },
+                        fieldRemoveWarn: true,
+                        /*disabledFieldButtons: {
+                                            text: ['remove', 'edit', 'copy'], // disables the remove butotn for text fields
+                                            number: ['remove', 'edit', 'copy'],
+                                            date: ['remove', 'edit', 'copy'],
+                                            },*/
+                             
+                        typeUserAttrs: { 
+                            text:   { 
+                                className: { 
+                                        label: 'Class',
+                                        options: {
+                                            'red form-control': 'Red',
+                                            'green form-control': 'Green',
+                                            'blue form-control': 'Blue'
+                                        }, 
+                                        style: 'border: 1px solid blue; color:red;',
+                                        }
+                                    },
+                                // paragraph: {
+                                //         name: {
+                                //                 label: 'Name',
+                                //                 type: 'text'
+                                //             }
+                                //            }
+                            },
+                        disabledAttrs: ["name",'className'],   
+                        disabledSubtypes:{ text: ['password'], paragraph : ['canvas', 'output'] },
+                        // disabledAttrs: ["value",'access','inline', "placeholder"],
+                        // typeUserDisabledAttrs: {
+                        //      'checkbox-group': [
+                        //                         'name',
+                        //                         'description',       
+                        //                         'toggle']},
+                        fields : [{
+                                    label: "Email",
+                                    type: "text",
+                                    subtype: "email",
+                                    icon: "✉"
+                                },
+                                {
+                                    label: "Phone Number",
+                                    type: "number",
+                                    icon : '☎',
+                                    min : 10,
+                                    max : 10
+
+                                },                          
+                            ],
+                        //inputSets: display_forms,
+
+                        formData: JSON.stringify(edit_form),
+                        dataType: 'json',
+                        // layoutTemplates: {
+                        //     label: function (label, data) {
+                        //     return $('<label class="bright"/>')
+                        //     .attr('for', data.id)
+                        //     .append(label);
+                        //     }
+                        //     }                    
+            };  
+
+                var formBuilder = $(fbEditor).formBuilder(options);                
+                document.getElementById('getJSON').addEventListener('click', function(event) {
+                    event.preventDefault(); 
+                    swal({
+                    title: "Are you sure?",
+                    text: "You want to updated the form",
+                    //dangerMode: true,
+                    buttons: ['No', 'Yes'],
+                    icon: "warning",
+
+                }).then(function(isConfirm) {
+                if (isConfirm) {
+                    swal({
+                        title: 'Updated!',
+                        text: 'Updated form',
+                        icon: 'success'
+                        }).then(function() {                     
+                            form_details = formBuilder.actions.getData('json');
+                            for_details = $("#form_details").val(form_details);
+                            $("#form").submit();
+                            return true;
+                                   });
+                        } else {
+                            swal("Cancelled", "Updation Cancelled", "error");
+                         }
+                    });
+                });
+                    });
+            
+            </script>
+<script src="{% static 'js/ajax-jquery.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(".settings-subgroup").addClass("sub-group-active");
+        $(".allform").addClass("menu-active");
+   });
+</script>
+ {% endblock %}

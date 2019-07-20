@@ -1,0 +1,51 @@
+[{"type":"header","subtype":"h3","label":"New Enquiry"},{"type":"number","required":true,"label":"Enquiry No.","className":"form-control","name":"number"},{"type":"text","required":true,"label":"Student First Name","name":"text-1559192495133","subtype":"text","className":"red form-control"},{"type":"text","required":true,"label":"Student Last Name","name":"text-1561980418032","subtype":"text","className":"red form-control"},{"type":"date","required":true,"label":"Date of Birth","className":"form-control","name":"date-1559192420009"},{"type":"select","required":true,"label":"Select Enquiry For","className":"form-control","name":"select-1561980531113","values":[{"label":"Option 1","value":"option-1"},{"label":"Option 2","value":"option-2"},{"label":"Option 3","value":"option-3"}]},{"type":"select","required":true,"label":"Transport Requirement","className":"form-control","name":"select-1561980546069","values":[{"label":"Option 1","value":"option-1"},{"label":"Option 2","value":"option-2"},{"label":"Option 3","value":"option-3"}]},{"type":"text","label":"Pick-up Point>","name":"text-1559192559263","subtype":"text","className":"red form-control"},{"type":"text","label":"Drop Point","name":"text-1561980572744","subtype":"text","className":"red form-control"},{"type":"text","label":"Previous School(if Any)","name":"text-1561980652826","subtype":"text","className":"red form-control"},{"type":"text","required":true,"label":"Father / Guardian Name","name":"text-1561980683387","subtype":"text","className":"red form-control"},{"type":"number","required":true,"label":"Mobile:","className":"form-control","name":"number-1559192704331"},{"type":"text","subtype":"email","label":"E-mail","name":"text-1560403411640","className":"red form-control"},{"type":"text","required":true,"label":"Mother's Name","name":"text-1559192622404","subtype":"text","className":"red form-control"},{"type":"number","required":true,"label":"Mobile","className":"form-control","name":"number-1559192727273"},{"type":"text","subtype":"email","label":"E-mail","name":"text-1561980747322","className":"red form-control"},{"type":"text","required":true,"label":"Relation with Child","name":"text-1561980759460","subtype":"text","className":"red form-control"},{"type":"textarea","required":true,"label":"Temporary Address of Parent / Guardian","className":"form-control","name":"textarea-1559192684683","subtype":"textarea"},{"type":"textarea","required":true,"label":"Permanent Address of Parent / Guardian","className":"form-control","name":"textarea-1561981499909","subtype":"textarea"},{"type":"header","subtype":"h3","label":"Sibling Information: (if studying in our School)"},{"type":"text","label":"Sibling Name","name":"text-1561981589384","subtype":"text","className":"red form-control"},{"type":"select","label":"Select Program","className":"form-control","name":"select-1561981658468","values":[{"label":"Option 1","value":"option-1"},{"label":"Option 2","value":"option-2"},{"label":"Option 3","value":"option-3"}]},{"type":"select","label":"Select Gender","className":"form-control","name":"select-1561981690931","values":[{"label":"Option 1","value":"option-1","selected":true},{"label":"Option 2","value":"option-2"},{"label":"Option 3","value":"option-3"}]},{"type":"header","subtype":"h3","label":"How Do you Know about our School"},{"type":"checkbox-group","label":"","name":"checkbox-group-1561981768700","values":[{"label":"Website","value":"Website","selected":true},{"label":"News Paper","value":"News Paper"},{"label":"Social Media","value":"Social Media"},{"label":"Hoarding","value":"Hoarding"},{"label":"Friends / Ref.","value":"Friends / Ref."}]}]
+
+
+
+
+
+
+
+<input type="'+fields+'" class="fileSingleView '+form_fields[i].className+'" onchange="upload_file(this.id)" id="'+form_fields[i].name+'" >
+
+
+
+  	<!-- <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  	<script src="{% static 'js/jquery-1-11-3/jquery-1.11.3.min.js' %}"></script> -->	
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+
+https://bootsnipp.com/snippets/x8Goz
+
+
+<style>
+    .stage-wrap{
+        padding-left: 25px !important;
+    }
+    input[type="email"], input[type="date"], input[type="file"]{
+        background-color: #fff !important;
+        border:1px solid #ccc !important;
+    }
+    input{
+        background-color: #fff !important;
+    }
+    .fb-autocomplete{
+        border:1px solid #ccc !important;
+        border-radius:5px;
+    }
+</style>
+
+
+<html lang="en">
+<head>
+	<title>Dynamic Form</title>
+	<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body><br><br><br><br><br>
+	<div class="container preview1">
+		
+			<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>

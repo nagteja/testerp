@@ -1,0 +1,679 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+<!-- <link rel="stylesheet" href="{% static 'css/user_style.css' %}"> -->
+<div class="breadcrumbs-area">
+    <h3>Roles Management</h3>
+    <ul>
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li>All Users</li>
+    </ul>
+</div>
+<div class="main_container row no_t_padding display_flx" id="search_item"  style="padding-top:20px;">
+    <div class="col-md-4 col-sm-12 col-xs-12 view_bg_colr no_padding">
+        <div class="card height-auto main_list_bg " id="sidemenu responsve_ul_list">
+            <div class="card-body system_view Nopadding">
+                <div class="heading-layout1">
+                    <div class="item-title">
+                        <h3 style="padding-left: 20px;">Role Hierarchy</h3>
+                    </div>
+                    <div class="dropdown dropdownTopPad">
+                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-search searchButtonColor" id="searchButton" aria-hidden="true"></i></a>
+                        <a class=""  id="addProfileButton" href="#" role="button"  data-toggle="modal" data-target=""  aria-expanded="false"><i class="fa fa-plus-circle addButtonColor" aria-hidden="true"></i></a>                        
+                    </div>                    
+                </div>
+                <div class="searchInputText">
+                <input type='text' id='search' class="searchInputWidth" placeholder='Search ...'>
+                </div>
+                     <div class="form-group" id="searchcontent">
+                        <ul class="navbar-collapse2">
+                            {% for profile in user_details %}
+                            <form method="POST" action="/accounts/select-user/{{profile.user.id}}/" id="myProfile" name= "myProfile{{profile.user.id}}" class="new-added-form"> 
+                            <table class="table tableMargin">
+                            <tbody id="myprofileTable">
+                              <tr>
+                                <td class="Idprofile">{{profile.user.last_name}} {{profile.user.first_name}}<br>{{profile.user_role}}<br>{{profile.user.email}}</td>
+                                <td class="IdprofileSearch">
+                                    <div class="col-md-12 row user-per profilecontent searchcontent BorderList IdinputProfile myProfile{{profile.user.id|cut:' '}} " onClick="document.forms['myProfile{{profile.user.id}}'].submit();" style="margin-right:0px !important;margin-left:0px !important;" >
+                                        <div class="col-md-4 paddingForImg"><img class="circleImg" src="/static/images/index.jpeg" alt="profile pic">
+                                        </div>
+                                        <div class="col-md-8 paddingTopProfile ">
+                                            <b>{{profile.user.last_name}} {{profile.user.first_name}}</b><br>
+                                            <span class="span-userdetails">{{profile.user_role}}</span><br>                        
+                                            <span class="span-userdetails">{{profile.user.email}}</span> 
+                                        </div>
+                                    </div>
+                                </td>
+                                 </tr>
+                              </tbody>
+                            </table>
+                            </form>
+                            {% endfor %}
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12 view_details_colr no_padding no_t_padding profileOfCandidate">
+        <div class="col-md-12 col-sm-12 col-xs-12 card height-auto rolePermissionBlock" id="individualProfileEditBlock">
+           <div class="card-body Nopadding width_100">
+                <div class="container col-md-12 col-sm-12 col-xs-12 row rolePermissionBlock">
+                    <div class="container Nopadding width_100 paddingForImg selectUserProfileDefault {{sel_user.id|cut:' '}}">            
+                        <form action="/accounts/select-user-update/{{sel_user.id}}/" method="POST" class="" style="margin-bottom: 8px;">
+                            <button type="button" class="buttonDeactivate">Deactivate</button>
+                            <div class="col-md-12 container col-sm-12 col-xs-12 row">                          
+                            <div class="col-md-4" style="text-align: center;"><img class="circleImgProfile" src="/static/images/index.jpeg" alt="profile pic">
+                                </div>
+                            <div class="col-md-8 row">
+                                <div class="col-md-7" id="editspan">                         
+                                    <p class="inputMarginP"><b><span>{{sel_user.last_name}}</b></span>
+                                    <b><span>{{sel_user.first_name}}</b></span></p>
+                                    <p><span >{{sel_user.profile.user_role}}</span> <span > at {{sel_user.profile.school}}</span></p>                                        
+                                    <p><span >{{sel_user.email}}</span><br>
+                                    <span ><i class="fa fa-phone" style="transform:rotate(360deg);"></i>  {{sel_user.profile.mobile}}</span></p>
+                                </div>
+                                <div class="col-md-1"><a id="editbutton" href="#" role="button"  data-toggle="modal" data-target=""  aria-expanded="false"><i class="fas fa-pen paddingpenleft"></i></a></div>
+                                <div class="col-md-12" style="margin-top: 5px;">
+                                    <table class="textbox editINPUT" id="profileInoEdit">
+                                            <colgroup>
+                                                <col width="220">
+                                                <col width="15">
+                                                <col style="padding-left: 10px;">
+                                            </colgroup>
+                                        <tbody> 
+                                        <tr>
+                                            <td><label for="uname" style="padding-top: 5px;">First name</label></td>
+                                            <td>:</td>
+                                            <td><input type="text" placeholder="First name" name="first_name_pro" class="borderRadiusInput" value="{{sel_user.first_name}}"></td>
+                                        </tr> 
+                                         <tr>
+                                            <td><label for="uname" style="padding-top: 5px;">Last name</label></td>
+                                            <td>:</td>
+                                            <td><input type="text" placeholder="Last name" name="last_name_pro" class="borderRadiusInput" value="{{sel_user.last_name}}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label class="" for="roles">Select Roles</label> at {{sel_user.profile.school}}</td>
+                                            <td style="padding-bottom: 15px;">:</td>
+                                            <td><div id="select_boxroles"  class=""></div></td>
+                                        </tr> 
+                                         
+                                        <tr><td><label class="" for="email" style="padding-top: 5px;">Email</label></td>
+                                            <td>:</td><td> &nbsp;&nbsp;{{sel_user.email}}</td></tr>
+                                         <tr>
+                                            <td><label for="mobile" style="padding-top: 5px;">Mobile</label></td>
+                                            <td>:</td>
+                                            <td><input class="borderRadiusInput input_form_text reg_tab_half" type="number" name="mobile_pro" tabindex="6" required="required" value="{{sel_user.profile.mobile}}" id="id_mobile_pro" placeholder="Mobile Number" pattern="[0-9]{10,10}" autocomplete="off" maxlength="10" oninvalid="this.setCustomValidity('Please Enter Mobile Number')" oninput="setCustomValidity('')"><br>
+                                                {{form.errors.mobile}}
+                                                <label id="mobile_error_pro">Please give in number format / <br>Mobile number already exist</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="text-align: center;"><button type="submit" name="button" class="userProfileEditSubmit" id="profileButton" value="Update">Update</button></td>
+                                        <tr>
+                                        </tbody> 
+                                        </table>
+                                    </div>                                   
+                               </div>
+                            </div>
+                            <div class="container col-md-12 col-sm-12 col-xs-12 paddingForImg paddingForUserInfo paddingForUserInfoleft table-responsive">
+                                <p><b>User Information</b> <a id="editUserIno" href="#" role="button"  data-toggle="modal" data-target=""  aria-expanded="false"><i class="fas fa-pen paddingpenleft"></i></a></p>
+                                <div class="col-md-12">
+                                    <table class="" id="editUserInoSpan">
+                                        <colgroup>
+                                            <col width="250">
+                                            <col style="padding-left: 10px;">
+                                        </colgroup>
+                                        <tbody>
+                                            <tr class="HeightTr">
+                                                <td>Employee ID.</td>
+                                                <td><span class="editESPAN">{{sel_user.profile.empid}}</span></td>
+                                            </tr>
+                                            <!-- <tr class="HeightTr">
+                                                <td>First name</td>
+                                                <td>{{sel_user.first_name}}</td>
+                                            </tr>
+                                            <tr class="HeightTr">
+                                                <td>Last name</td>
+                                                <td>{{sel_user.last_name}}</td>
+                                            </tr> -->
+                                            <tr class="HeightTr">
+                                                <td>Gender</td>
+                                                <td>{{sel_user.profile.gender}}</td>
+                                            </tr class="HeightTr">
+                                            <tr class="HeightTr">
+                                                <td>Date of Birth</td>
+                                                <td>{{sel_user.profile.dob}}</td>
+                                            </tr>
+                                            <tr class="HeightTr">
+                                                <td>Blood Group</td>
+                                                <td>{{sel_user.profile.blood_group}}</td>
+                                            </tr>
+                                            
+                                            <tr class="HeightTr">
+                                                <td>Added By</td>
+                                                <td>{{user_details.0.user_role}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="textbox" id="userInoEdit">
+                                        <colgroup>
+                                            <col width="230">
+                                            <col width="15">
+                                            <col width="230" style="padding-left: 10px;">
+                                        </colgroup>
+                                        <tbody> 
+                                        <tr>
+                                            <td><label for="uname">Employee ID.</label></td>
+                                            <td>:</td>
+                                            <td><input type="text" placeholder="Employee ID" name="empid_pro" class="borderRadiusInput" value="{{sel_user.profile.empid}}"></td>
+                                        </tr> 
+                                       <!--  <tr>
+                                            <td><label for="uname">First name</label></td>
+                                            <td>:</td>
+                                            <td>{{sel_user.first_name}}</td>
+                                        </tr> 
+                                        <tr>
+                                            <td><label for="uname">Last name</label></td>
+                                            <td>:</td>
+                                            <td>{{sel_user.last_name}}</td>
+                                        </tr> -->
+                                        <tr>
+                                            <td><label class="" for="gender">Gender</label></td>
+                                            <td>:</td>
+                                            <td><select class="modalSelectBlock" style="margin-bottom: 0px !important;"  name="gender_pro">
+                                                    <option>{{sel_user.profile.gender}}</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="others">Others</option>
+                                                </select></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="dob">Date of Birth</label></td>
+                                            <td>:</td>
+                                            <td><input type="date" placeholder="Date of Birth" name="dob_pro" class="borderRadiusInput" value="{{sel_user.profile.dob|date:'Y-m-d'}}"  style="width: 100%;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="bloodgroup">Blood Group</label></td>
+                                            <td>:</td>
+                                            <td><input type="text" placeholder="Blood Group" name="blood_group" class="borderRadiusInput" value="{{sel_user.profile.blood_group}}"></td>
+                                        </tr>
+                                        
+                                        <tr class="HeightTr">
+                                            <td  style="padding-top: 5px;">Added By</td>
+                                            <td>:</td>
+                                            <td>CEO</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="text-align: center;"><button type="submit" name="button" class="userProfileEditSubmit" id="userInfoButton">Update</button></td>
+                                        <tr> 
+                                        </tbody> 
+                                    </table>
+                                </div>
+                            </div>
+                            <hr style="margin-left: 10px;">
+                            <div class="container col-md-12 col-sm-12 col-xs-12 paddingForImg paddingForUserInfoleft table-responsive">
+                                <p><b>Contact Information</b> <a id="mycontact_Information" ><i class="fas fa-pen paddingpenleft"></i></a></p>
+                                <div class="col-md-12">
+                                    <table class="" id="editContactIno">
+                                        <colgroup>
+                                            <col width="250">
+                                            <col style="padding-left: 10px;">
+                                        </colgroup>
+                                        <tbody>
+                                           <!--  <tr class="HeightTr">
+                                                <td>E-mail</td>
+                                                <td>{{sel_user.email}}</td>
+                                            </tr>
+                                            <tr class="HeightTr">
+                                                <td>Mobile</td>
+                                                <td>{{sel_user.profile.mobile}}</td>
+                                            </tr> -->
+                                            <tr class="HeightTr">
+                                                <td>Street</td>
+                                                <td>{{sel_user.profile.address}}</td>
+                                            </tr>
+                                            <tr class="HeightTr">
+                                                <td>Country</td>
+                                                <td>{{sel_user.profile.country}}</td>
+                                            </tr>  
+                                            <tr class="HeightTr">
+                                                <td>State</td>
+                                                <td>{{sel_user.profile.state}}</td>
+                                            </tr>  
+                                            <tr class="HeightTr">
+                                                <td>City</td>
+                                                <td>{{sel_user.profile.city}}</td>
+                                            </tr>
+                                                                                  
+                                        </tbody>
+                                    </table>
+                                    <table class="" id="contactInoEdit">
+                                        <colgroup>
+                                            <col width="230">
+                                            <col width="15">
+                                            <col width="230" style="padding-left: 10px;">
+                                        </colgroup>
+                                        <tbody>
+                                            <!-- <tr class="HeightTr">
+                                                <td>E-mail</td>
+                                                <td>:</td>
+                                                <td>{{sel_user.email}}</td>
+                                            </tr>
+                                            <tr class="HeightTr">
+                                                <td>Mobile</td>
+                                                <td>:</td>
+                                                <td>{{sel_user.profile.mobile}}</td>
+                                            </tr> -->
+                                            <tr>
+                                                <td><label for="address">Street</label></td>
+                                                <td>:</td>
+                                                <td><textarea placeholder="Address.." name="address" class="borderRadiusInput" value="{{sel_user.profile.address}}">{{sel_user.profile.address}}</textarea></td>
+                                            </tr> 
+                                            <tr>
+                                                <td><label for="country">Country</label></td>
+                                                <td>:</td>
+                                                <td><select class="modalSelectBlock js-example-basic-single countries width_size schoolInputBorder schoolSelect inputPadding" id="countryId" name="country_pro" required>
+                                                    <option value="{{sel_user.profile.country}}">{{sel_user.profile.country}}</option>
+                                                    {% if sel_user.0.country %}
+                                                    <option value="{{school_check.0.country}}" selected="select">{{sel_user.0.country}}</option>
+                                                    {% else %}
+                                                    <option value="{{sel_user.profile.country}}">{{sel_user.profile.country}}</option>
+                                                    {% endif %}
+                                                 </select>
+                                                </td>
+                                            </tr>
+                                           <tr>
+                                                <td><label for="state">State</label></td>
+                                                <td>:</td>
+                                                <td><select name="state_pro" class="modalSelectBlock js-example-basic-double states name_reg country_focus country_align reg_tab_half fname educator_half inputPadding schoolSelect tdColor" id="stateId" required>
+                                                    <option value="{{sel_user.profile.state}}">{{sel_user.profile.state}}</option>
+                                                    {% if sel_user.0.state %}
+                                                    <option value="{{school_check.0.state}}" selected="select">{{sel_user.0.state}}</option>
+                                                    {% else %}
+                                                    <option value="">select State</option>
+                                                    {% endif %}
+                                                    </select>
+                                                </td>
+                                            </tr> 
+                                            <tr>
+                                                <td><label for="city">City</label></td>
+                                                <td>:</td>
+                                                <td><select name="city_pro" class="modalSelectBlock js-example-basic-three cities name_reg country_focus country_align reg_tab_half fname educator_half schoolInputBorder schoolSelect inputPadding" id="cityId" required>
+                                                    <option value="{{sel_user.profile.city}}">{{sel_user.profile.city}}</option>
+                                                    {% if sel_user.0.city %}
+                                                    <option value="{{school_check.0.city}}" selected="select">{{sel_user.0.city}}</option>
+                                                    {% else %}
+                                                    <option value="{{sel_user.profile.city}}">{{sel_user.profile.city}}</option>
+                                                    {% endif %}
+                                                </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center;"><button type="submit" name="button" class="userProfileEditSubmit" id="userInfoButton">Update</button></td>
+                                        <tr> 
+                                        </tbody> 
+                                    </table> 
+                                </div>
+                            </div>
+                            <div style="text-align:center;">
+                            <button type="button" class="buttonDeleteUser">Delete this User</button>
+                            </div>
+                        </form>                     
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 card height-auto rolePermissionBlock" id="AddProfileBlock">
+            <div class="card-body Nopadding width_100">
+                <div class="container Nopadding width_100 paddingForImg">
+                    <form action="/accounts/create-user/" method="POST">
+                      <div class="container">
+                        <h5 class="header-margin-bottom">Add New User</h5>
+                        <span class="span-fill-font">Please fill in this form to create an account.</span>
+                        
+                         <!-- <label for="uname"><b>First name</b></label> -->
+                        <input type="text" placeholder="First name" name="first_name" class="modalInputBlockUserOne">
+                        
+                        <!-- <label for="uname"><b>Last name</b></label> -->
+                        <input type="text" placeholder="Last name" name="last_name" class="modalInputBlockUser">
+                        <!-- <label>
+                          <input type="file" name="file" class="width_100" id="fileToUpload">
+                        </label>
+                        <label  class="opacityParent" for="email"><b>Gender</b></label>
+                        <select class="overlapOpacityParen width_100"  name="gender">
+                          <option>Select Gender</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="others">Others</option>
+                        </select>
+
+                        <label for="email"><b>DOB</b></label>
+                        <input type="date" name="date" class="width_100"  required><br>
+
+                        <label for="email"><b>Blood Group</b></label>
+                        <input type="text" placeholder="Blood Group" name="blood" class="modalInputBlock" required> -->
+
+                        <!-- <label for="email"><b>Employee Id</b></label> -->
+                        <input type="text" placeholder="Employee ID." name="empid" class="modalInputBlockUser" required>
+
+                        <!-- <label for="email"><b>Religion</b></label>
+                        <input type="text" placeholder="Religion" name="religion" class="modalInputBlock" required>
+
+                       <label for="email"><b>Email</b></label> -->
+                        <input type="text" placeholder="Email" name="email" id="email" class="modalInputBlockUser" required>
+                        <span id="email_error">email id already exist</span>
+
+                        <!-- <label for="mobile"><b>Mobile</b></label> -->
+                        <input type="text" placeholder="Mobile" pattern="[0-9]+" class="modalInputBlockUser" onKeyPress="if(this.value.length==13) return false;" id="mobile" name="mobile" required>
+                        <span id="mobile_error">Mobile number already exist</span>
+
+
+                        <label class="opacityParent" for="roles"><b>Select Roles</b></label>
+                        <div id="select_box"  class="overlapOpacityParent"></div>
+
+                       <!--  <label for="psw"><b>Password</b></label> -->
+                        <input type="password" placeholder="Enter Password" class="modalInputBlockUserLast" name="password" required>
+
+                       <!--  <label for="psw-repeat"><b>Repeat Password</b></label>
+                        <input type="password" placeholder="Repeat Password" name="psw-repeat" required> -->
+
+                        <label class="userLabelCheckbox">
+                          <input type="checkbox"  name="is_admin" style="ba"><span style="font-size: 12px !important; padding-left:8px;">Check if Admin</span>
+                        </label>
+
+                        <div class="clearfix">
+                          <!-- <button type="button" class="cancelbtn btn btn-warning buttonCreateCancel">Cancel</button> -->
+                          <button type="submit" class="signupbtn btn btn-warning buttonCreateCancel">ADD</button>
+                        </div>
+                      </div>
+                    </form>
+                </div>
+             </div>
+        </div>
+    </div>  
+</div>
+
+
+
+<script src="{% static 'erp/js/jquery.ajax.min.js' %}"></script>
+
+<script type="text/javascript">
+     $('#roles').ready(function(){
+      $.ajax({
+          url: "/accounts/select-roles/",
+          type: "GET",
+          contentType: false,
+          processData:false,
+          success: function(data)
+          {
+
+          json = JSON.parse(data)  
+          var html = '' 
+            html += '<select name="roles" id="roles" class="modalSelectBlock width_100">'+
+                    '<option value="">Select Role</option>';
+          for(i=0;i<json.length;i++){
+            html += '<option value="'+json[i]['fields']['roles']+'">'+json[i]['fields']['roles']+'</option>';
+          }        
+            html += '</select>';
+          $('#select_box').html(html);
+          $('#select_boxtwo').html(html);
+          },
+          error: function() 
+          {
+
+          }           
+        });
+      });
+
+      $("#mobile_error").hide();
+      $("#uname_error").hide();
+      $("#email_error").hide();
+      $('#mobile').change(function(){
+      var form = new FormData();
+      form.append("mobile", $('#mobile').val());
+      $.ajax({
+          url: "/accounts/mobilevalidation/",
+          type: "POST",
+          data: form, 
+          contentType: false,
+          processData:false,
+          success: function(data)
+          {
+            if(data=="yes"){
+              $("#mobile_error").show();
+              $("#mobile_error").addClass("validatErrorAddTop");
+              $("#mobile").addClass("validatErrorAddColor");
+              return false;
+            }else{
+              $("#mobile_error").hide();
+              $("#mobile").removeClass("validatErrorAddColor");
+            }
+          },
+          error: function() 
+          {
+
+          }           
+        });
+      });
+
+    $('#username').change(function(){
+      var form = new FormData();
+      form.append("username", $('#username').val());
+      $.ajax({
+          url: "/accounts/usernamevalidation/",
+          type: "POST",
+          data: form, 
+          contentType: false,
+          processData:false,
+          success: function(data)
+          {
+            if(data=="yes"){
+              $("#uname_error").show();
+              return false;
+            }else{
+              $("#uname_error").hide();
+            }
+
+          },
+          error: function() 
+          {
+
+          }           
+        });
+      });
+
+      $('#email').change(function(){
+      var form = new FormData();
+      form.append("email", $('#email').val());
+      $.ajax({
+          url: "/accounts/emailvalidation/",
+          type: "POST",
+          data: form, 
+          contentType: false,
+          processData:false,
+          success: function(data)
+          {
+            if(data=="yes"){
+              $("#email_error").show();
+              $("#email_error").addClass("validatErrorAddTop");
+              $("#email").addClass("validatErrorAddColor");
+              return false;
+            }else{
+              $("#email_error").hide();
+              $("#email").removeClass("validatErrorAddColor");
+            }
+
+          },
+          error: function() 
+          {
+
+          }           
+        });
+      });
+
+$("#mobile_error_pro").hide();
+$('#id_mobile_pro').change(function(){
+var form = new FormData();
+form.append("mobile_pro", $('#id_mobile_pro').val());
+    $.ajax({
+      url: "/accounts/mobilevalidation/",
+      type: "POST",
+      data: form, 
+      contentType: false,
+      processData:false,
+      success: function(data)
+      {
+        if(data=="yes"){
+            $("#mobile_error_pro").show();
+            $("#mobile_error_pro").addClass("validatErrorAddTopProfile");
+            $("#id_mobile_pro").addClass("validatErrorAddColor");
+          return false;
+        }else{
+          $("#mobile_error_pro").hide();
+          $("#id_mobile_pro").removeClass("validatErrorAddColor");
+        }
+      },
+      error: function() 
+      {
+
+      }           
+    });
+});
+$('#roles_id').ready(function(){
+      $.ajax({
+          url: "/accounts/select-roles/",
+          type: "GET",
+          contentType: false,
+          processData:false,
+          success: function(data)
+          {
+
+          json = JSON.parse(data)  
+          var html = '' 
+            html += '<select name="roles_pro" id="roles_id" class="modalSelectBlock width_100">'+
+                    '<option value="{{sel_user.profile.user_role}}">{{sel_user.profile.user_role}}</option>';
+          for(i=0;i<json.length;i++){
+            html += '<option value="'+json[i]['fields']['roles']+'">'+json[i]['fields']['roles']+'</option>';
+          }        
+            html += '</select>';
+          $('#select_boxroles').html(html);          
+          },
+          error: function() 
+          {
+
+          }           
+        });
+      });
+
+
+    $('#search').hide();
+    $(".Idprofile").hide()
+    $("#searchButton").click(function(){
+        $('#search').show();
+        $('#search').keyup(function(){// Search text
+            var text = $(this).val().toLowerCase();
+            // alert(text);
+            // Hide all content class element
+            $('.searchcontent').hide();
+
+            $('#search').on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+
+                $("#myprofileTable tr").filter(function() {
+
+                  var abc = $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                  $(".Idprofile").hide()
+                  $(".IdinputProfile").show()
+
+                });
+            });
+
+            // Search
+            $('div.searchcontent').each(function(){ 
+                if($(this).text().toLowerCase().indexOf(text) === -1 ){
+                $(this).closest('div.searchcontent').fadeOut();
+            }
+            });
+        });
+    });
+
+  
+    $('.profilecontent').click(function() {
+        var details = $(this).val();
+            $(".profileOfCandidate").show();
+            $(".dropdown").val(details);    
+    }); 
+
+</script>
+<script type="text/javascript">
+$('.reg_str').addClass('selected');
+    $(document).ready(function(){
+        $(".settings-subgroup").addClass("sub-group-active");
+        $(".user-details").addClass("menu-active");
+        $('#individualProfileEditBlock').hide();
+        $(".myProfile{{sel_user.id|cut:' '}}").addClass("addMyProfile", function(){
+            $('#AddProfileBlock').hide();
+            $('#individualProfileEditBlock').show();
+        });
+
+
+        // if($(".selectUserProfileDefault {{sel_user.id|cut:' '}}").val()==''){
+            
+        // }
+       
+    // $('#AddProfileBlock').hide();
+    
+    // $('.new-added-form').click(function() { 
+    //     $('#AddProfileBlock').hide();        
+    //     $('#individualProfileEditBlock').show();
+
+    //     });
+
+
+    $('#addProfileButton').on('click', function() {
+        $('#individualProfileEditBlock').hide();
+        $('#AddProfileBlock').show();
+        });
+
+
+    $('#profileButton').hide();
+    $("#profileInoEdit").hide();     
+    $('#editbutton').on('click', function() {
+        $('#editspan').hide();
+        $('#profileInoEdit').show();
+        $('#editbutton').hide();
+        $('#profileButton').show();
+    });
+
+    $('#userInoEdit').hide();
+    $('#editUserIno').on('click', function() {
+        $('#editUserInoSpan').hide();
+        $('#userInoEdit').show();
+        $('#editUserIno').hide();
+    });    
+    $('#contactInoEdit').hide();
+    $('#mycontact_Information').on('click', function() {
+        $('#editContactIno').hide();
+        $('#contactInoEdit').show();
+        $('#mycontact_Information').hide();
+    });
+
+    $('.js-example-basic-single').select2({
+        placeholder: "Select a country",
+    });
+
+    $('.js-example-basic-double').select2({
+        placeholder: "Select a state",
+    });
+
+    $('.js-example-basic-three').select2({
+        placeholder: "Select a city",
+    });
+
+
+   });
+</script>
+
+{% endblock %}

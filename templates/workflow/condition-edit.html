@@ -1,0 +1,46 @@
+{% load static %}
+{% block content %}
+<div id="editFormAfterSave" class="modal-body">
+	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	<div class="modal-header modalHeaderCenterAlign">		
+		<h5>Edit this condition</h5>
+	</div>
+	<div>
+		<form class="form-main" method="POST" action="/workflow/condition-update/{{wrkflw_lead.id}}/{{rule.id}}/">
+			<div class="form-block_1 row modalPadding">
+				<div class="col-md-4 margin_top_2">
+					<select name="leads_action" class="width_40_p" id="element1">
+						{% for i in leads %}
+						<option {% if wrkflw_lead.leads == i.name %} selected {% endif %}  value="{{ i.name }}">
+						{{ i.actions }}</option>
+
+						{% endfor %}
+					</select>								
+				</div>	
+				<div class="col-md-4 margin_top_2">
+					<select class="width_40_p" name="leads_condition">
+						<option value="{{wrkflw_leads.0.condition_arthimatic}}">
+							{% for i in leads_condition %}
+								<option {% if wrkflw_lead.condition_arthimatic == i.actions %} selected {% endif %}  value="{{i.actions }}">{{ i.actions }}</option>
+							{% endfor %}
+					</select>
+				</div>
+				<div class="col-md-4 margin_top_2">
+					<input type="text" class="width_40_p" name="condition" value="{{wrkflw_lead.condition}}">
+				</div>
+			</div>
+			<div id="form-new" class="no_pad_margin"></div>
+			<div class="col-md-12 pad_top">
+				<input type="submit" name="submit" value="Save" class="btn btn-primary save_btn_desgn modalInputSave">
+			</div>
+		</form>
+	</div>
+</div>
+<script src="{% static 'erp/js/jquery.ajax.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(".settings-subgroup").addClass("sub-group-active");
+        $(".workflow").addClass("menu-active");
+   });
+</script> 
+{% endblock %}

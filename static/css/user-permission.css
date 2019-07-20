@@ -1,0 +1,25 @@
+	.full_width{width: 100%;padding-top: 3%;padding-bottom: 3%; background-color: #147efb;border:none;margin-bottom: 2px; color: #fff;}
+	.half_width{width: 100%;padding-top: 3%;padding-bottom: 3%; background-color: #147efb;border:none;margin-bottom: 2px; color: #fff;}
+	.selected{background-color: #fc3158;color: #fff !important;}
+	.selected_main{background-color: #53d769}
+	.full_width:hover{background: #fff;cursor: pointer; background-color: #53d769;}
+	.half_width:hover{background: #fff;cursor: pointer; background-color: #fc3158;}
+	.permisson_block{box-shadow: 1px 1px 2px rgba(0,0,0,0.2);border: 1px solid #e0e0e0;width: 22%;display: inline-block;margin-left: 1%;margin-top: 1%;padding: 1%;}
+	.permission_head{text-align: center;font-size: 16px;line-height: 40px;width: 100%;background: #fd9426;
+		color: #fff;font-weight: bold;}
+	.permission_form{margin-top: 8%;}
+	.one{background: #fc3158;}
+	.two{background-color: #147efb;}
+	.three{background: #53d769 !important;}
+	.four{background-color: #fc3d39;}
+	.user_1{display: none;}
+	.width_80{width:80%;}
+	/*.dropdown-menu.width_100.show{width: 40%;}*/
+	.dropdown_name{padding: 1%;width: 100%;text-align: left;background: #fff;border: 0;cursor: pointer;}
+	table thead tr, table tbody tr{border: 0;}
+	.table td, .table th{padding: 0 !important;border-bottom: 1px solid #dee2e6;border-top: 0;padding-top: 1% !important;}
+	.table td:hover{border-bottom: 1px solid #000;}
+
+h2{
+    color: #fff;
+}

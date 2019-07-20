@@ -1,0 +1,344 @@
+{% extends 'dashboard/header.html' %}
+{% load staticfiles %}
+{% block content %}
+ <!--userpermission--> 
+<div class="breadcrumbs-area">
+    <h3>Roles Management</h3>
+    <ul>
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li>Roles Management</li>
+    </ul>
+</div>
+<div class="main_container row no_t_padding display_flx" id="search_item"  style="padding-top:20px;">
+	<div class="col-md-4 col-sm-12 col-xs-12 view_bg_colr no_padding">
+		<div class="card height-auto main_list_bg " id="sidemenu responsve_ul_list">
+			<div class="card-body system_view Nopadding">
+				<div class="heading-layout1">
+					<div class="item-title">
+						<h3 style="padding-left: 20px;">Role Hierarchy</h3>
+					</div>
+					<div class="dropdown dropdownTopPad">
+						<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-search searchButtonColor" id="searchButton" aria-hidden="true"></i></a>
+						<a class="" id="addRoleButton" href="#" role="button"  data-toggle="modal" data-target=""  aria-expanded="false"><i class="fa fa-plus-circle addButtonColor" aria-hidden="true"></i></a>
+					</div>
+           		</div>
+           		<div class="searchInputText">
+                <input type='text' id='search' class="searchInputWidth" placeholder='Search ...'>
+                </div>
+				<form method="POST" action="/accounts/user-permission/" id="roles-submit" class="new-added-form"> 
+					 <div class="form-group" id = "searchcontent">
+						<ul class="navbar-collapse2">
+							{% for roles in roles %}
+							<table class="table tableMargin">
+							<tbody id="myTable" class="MytableRoll {{roles.roles|cut:' '}}">
+							  <tr>
+							  	<td class="IdRoles">{{roles.roles}}</td>
+
+							    <td class="col-md-12 user-per searchcontent BorderList IdinputRoles IdRoleSearch "><input type="submit" class="inputRole {{roles.roles|cut:' '}}" onclick = 'this.form.submit();' class="full_width" value="{{roles.roles}}" name="roles"></td>
+							  </tr>
+							  </tbody>
+							</table>
+							{% endfor %}
+						</ul>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-12 col-xs-12 view_details_colr no_padding no_t_padding">
+		<div class="col-md-12 col-sm-12 col-xs-12 card height-auto rolePermissionBlock">
+			<div class="card-body Nopadding width_100"  id="individualRoleEditBlock">
+			    <div class="heading-layout1 Nopadding">
+			        <div class="item-title rolePermissionHeading">
+			            <h3>
+							{% if  roles_post %}
+								User Roles for {{roles_post}}
+							{% else %}
+								Role Permission
+							{% endif %}
+						</h3>
+			        </div>     
+			   	 </div>
+
+			<div class="col-md-12 col-sm-12 col-xs-12 view_details_colr no_padding no_t_padding rolePermissionBlock">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div id="header_roles"></div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12 view_bas_detail_div Nopadding">
+					<div class="col-md-12 col-sm-12 col-xs-12 row rolePermissionBlock">
+						<div class="dropdown Nopadding width_100">
+							<table class="table" style="border:none !important;">
+								{% for module in module %}
+								<tr class="borderBottomTr">
+									<td class="collapseBorderTd">{{module.module}}</td>
+									<td class="collapseBorderTd">
+										<form action="/accounts/module-permissions/" method="POST" class="" style="margin-bottom: 8px;">
+											<div class="dropdown cq-dropdown" data-name='statuses'>
+												<button class="btn ActionButton  dropdown-toggle width_100" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="actionButtonText">Action</span>
+													{% for module_perm in module_perm %}
+															{% if module_perm.roles.roles == roles_post %}
+																{% if module_perm.module == module.module %}
+																		{% if module_perm.view == True %}
+																			View
+																		{% endif %}	
+																		{% if module_perm.edit == True %}
+																			Edit
+																		{% endif %}	
+																		{% if module_perm.create == True %}
+																			Create
+																		{% endif %}	
+																		{% if module_perm.delete == True %}
+																			Delete
+																		{% endif %}	
+																{% endif %}
+															{% endif %}
+													{% endfor %}
+												</button>
+												<ul class="dropdown-menu ulPadding" aria-labelledby="btndropdown">
+													<li>
+														<label class="radio-btn">
+															<input type="checkbox" 
+															{% for module_perm in module_perm %}
+																{% if module_perm.roles.roles == roles_post %}
+																	{% if module_perm.module == module.module %}
+																		{% if module_perm.view == True %}
+																			checked
+																		{% endif %}
+																	{% endif %}
+																{% endif %}
+															{% endfor %}  name='view' >			
+	 														View
+	 													</label>
+													</li>
+													<li>
+														<label class="radio-btn">
+															<input type="checkbox"
+															 {% for module_perm in module_perm %}
+																{% if module_perm.roles.roles == roles_post %}
+																	{% if module_perm.module == module.module %}
+																		{% if module_perm.edit == True %}
+																			checked
+																		{% endif %}
+																	{% endif %}
+																{% endif %}
+															{% endfor %} name='edit'>
+	 														Edit
+	 													</label>
+													</li>
+													<li>
+														<label class="radio-btn">
+															<input type="checkbox" 
+															{% for module_perm in module_perm %}
+																{% if module_perm.roles.roles == roles_post %}
+																	{% if module_perm.module == module.module %}
+																		{% if module_perm.create == True %}
+																			checked
+																		{% endif %}
+																	{% endif %}
+																{% endif %}
+															{% endfor %}
+															name='create'>
+	 														Create
+	 													</label>
+													</li>
+													<li>
+														<label class="radio-btn">
+															<input type="checkbox" 
+															{% for module_perm in module_perm %}
+																{% if module_perm.roles.roles == roles_post %}
+																	{% if module_perm.module == module.module %}
+																		{% if module_perm.delete == True %}
+																			checked
+																		{% endif %}
+																	{% endif %}
+																{% endif %}
+															{% endfor %}
+															 name='delete' >
+	 														Delete
+	 													</label>
+													</li>
+													<input type="hidden" name="roles" id="roles"  value="{{roles_post}}">
+													<input type="hidden" name="module" value="{{module.module}}">
+													<li class='text-center'>
+														<button type='button' class='btn btn-xs btn-danger clear close-dropdown' value='Clear'>Clear</button>
+														<button type='submit' class='btn btn-xs btn-success save' value='Save'>Save</button>
+													</li>
+												</ul>
+	     									</div>
+										</form>
+										</div>
+									</td>
+								</tr>
+								{% endfor %}
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 card height-auto rolePermissionBlock" id="AddRoleBlock">
+	<div class="card-body Nopadding width_100">
+		<div class="container Nopadding width_100 paddingForImg">
+			<form action="/accounts/roles/" method = "post" class="form-container modalBlock">
+				<div class="container">
+					<h5 class="createroll-margin-bottom">Create New Role</h5>
+
+					<input type="text" placeholder="Role Name" name="territoryname" id="territoryname" class="modalInputBlock" required><br>
+		            <label id="territory_error">Already exit</label>
+		            <label class="opacityParent" for="parentterriority"><b>Parent Role</b></label>
+		            <div id="select_box" class="overlapOpacityParent"></div>
+		            <button class="btn buttonPremission btn-sm dropdown-toggle dropdown-toggleOne" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Permission</button>
+					<ul class="dropdown-menu" aria-labelledby="btndropdown">
+						<li>
+							<label class="radio-btn">
+								<input type="checkbox"  name='view'>			
+									View
+								</label>
+						</li>
+						<li>
+							<label class="radio-btn">
+								<input type="checkbox" name='edit'>
+									Edit
+								</label>
+						</li>
+						<li>
+							<label class="radio-btn">
+								<input type="checkbox" name='create'>
+									Create
+								</label>
+						</li>
+						<li>
+							<label class="radio-btn">
+								<input type="checkbox" name='delete' >
+									Delete
+								</label>
+						</li>
+						<input type="hidden" name="roles" id="roles"  value={{roles_post}}>
+						<input type="hidden" name="module" value={{module.module}}>
+					</ul>
+				<div class="alignRight">
+		            <button type="submit" class="btn btn-warning buttonCreateTwo">Create</button>
+		            <button type="button" class="btn btn-warning cancel buttonCreateTwo" onclick="closeForm()">Close</button>
+	            </div>
+			</form>
+		</div>
+	</div>
+</div>
+	</div>
+  	
+<script src="{% static 'js/ajax-jquery.min.js' %}"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".dropdown-toggle").show();
+		$("#territory_error").hide();
+		$('.actionButtonText').hide();
+
+	$('input:button').click(function() {					
+			role = $(this).val()
+				$(".dropdown-toggle").show();				
+				$("input[type='hidden'][name='roles']").val(role);
+				
+		});
+	$(".settings-subgroup").addClass("sub-group-active");
+        $(".userPremission").addClass("menu-active");
+    // $(".{{roles_post|cut:' '}}").css("color", "#f7941d");
+    $('#individualRoleEditBlock').hide();
+	$(".{{roles_post|cut:' '}}").addClass("addMyRoll", function(){
+        $('#AddRoleBlock').hide();
+        $('#individualRoleEditBlock').show(); 
+     });
+     $('#addRoleButton').on('click', function() {
+        $('#individualRoleEditBlock').hide();
+        $('#AddRoleBlock').show();
+        });	
+
+	});
+	$('#search').hide();
+	$(".IdRoles").hide()
+	$("#searchButton").click(function(){
+		$('#search').show();
+		$('#search').keyup(function(){// Search text
+			var text = $(this).val().toLowerCase();
+			// alert(text);
+			// Hide all content class element
+			$('.searchcontent').hide();
+
+			$('#search').on("keyup", function() {
+			    var value = $(this).val().toLowerCase();
+
+			    $("#myTable tr").filter(function() {
+
+			      var abc = $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			      $(".IdRoles").hide()
+			      $(".IdinputRoles").show()
+
+			    });
+		  	});
+
+			// Search
+			$('div.searchcontent').each(function(){ 
+			    if($(this).text().toLowerCase().indexOf(text) === -1 ){
+			    $(this).closest('div.searchcontent').fadeOut();
+    		}
+  			});
+ 		});
+	});	
+	$('#parentterriority').ready(function(){
+            $.ajax({
+                    url: "/accounts/territory/",
+                    type: "GET",
+                    contentType: false,
+                    processData:false,
+                    success: function(data)
+                    {
+                        json = JSON.parse(data)  
+                        var html = '' 
+                        html += '<select name="parentterriority" id="parentterriority" class="form-container modalSelectBlock">'+
+                                '<option value="">Parent Role</option>';
+                        for(i=0;i<json.length;i++){
+                            html += '<option value="' + json[i]['fields']['roles']+ '">'+json[i]['fields']['roles']+'</option>';
+                        }        
+                        html += '</select>';
+                        $('#select_box').html(html);
+                    },
+                    error: function() 
+                    {
+
+                    }           
+            });
+        });
+
+	$('#territoryname').change(function(){
+			var form = new FormData();
+			form.append("territoryname", $('#territoryname').val());
+			$.ajax({
+					url: "/accounts/territoryvalidation/",
+					type: "POST",
+					data: form, 
+					contentType: false,
+					processData:false,
+					success: function(data)
+					{
+						if(data=="yes"){
+							$("#territory_error").show();
+							$("#territory_error").addClass("validatErrorAddTop");
+							$("#territoryname").addClass("validatErrorAddColor");
+							return false;
+						}else{
+							$("#territory_error").hide();
+							$("#territoryname").removeClass("validatErrorAddColor");
+						}
+					},
+					error: function() 
+					{
+
+					} 	        
+				});
+			});
+	
+
+</script>
+
+{% endblock %}

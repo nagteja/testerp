@@ -1,0 +1,240 @@
+.content-box2 {
+	font-family: 'Open Sans',sans-serif !important;
+    columns: 2 auto;
+    column-gap: 30px;
+    /*column-rule: thin inset black;*/
+    text-align: justify;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background-color: #fff;
+    margin-top: 10px;
+    padding:10px;
+    border-radius:5px;
+}
+.content-box{
+    background: #fff;
+    border-radius:10px;
+    padding-left: 14px;
+    font-size:14px !important;
+    font-family: 'Open Sans',sans-serif !important;
+    padding-bottom: 10%;
+
+}
+
+/*input{
+	columns: 2 auto;
+	column-gap: 30px;
+	/*border: 1px solid #ccc !important;*/
+/*}
+*/
+.inputform-control 
+{
+    background-color: #fff !important;
+    border: 1px solid #ced4da !important;
+}
+
+
+.ul-database{
+    list-style-type: none;
+    
+}
+a {
+    text-decoration: none;
+}
+
+.previewInput{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none !important;
+    font-size: 14px;
+    background: #f0f1f3 !important;
+    height: 50px;
+    border-radius:5px;
+    color:#6c757d !important;
+}
+
+.previewInputCheckbox{
+    border: none !important;
+    font-size: 14px;       
+    border-radius:5px;    
+    
+
+}
+.checkBoxbgcolor{
+    width:47% !important;
+    background: #f0f1f3 !important;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius:5px;
+    padding: 0px 10px 10px 10px;
+    color:#6c757d !important;
+  }
+
+
+input[type="date"]:before {
+
+    content: attr(placeholder) !important;
+
+  }
+  input[type="date"]:focus:before,
+
+  input[type="date"]:valid:before {
+
+  /*  content: "Date of Birth" !important;*/
+
+  }
+
+.widthdivSixCol{
+    width:49%;
+    padding-left:1%;
+    padding-right:1%;
+
+}
+.widthdivCol{
+    width:100%;
+    padding-left:1%;
+    padding-right:1%;
+    padding-top:2%;
+}
+
+.widthdivSixColPreview{
+    width:49%;
+    margin-right: 1%;
+
+}
+.widthdivColPreview{
+    width:100%;
+    padding-top:2%;
+    padding-left:3%;
+}
+
+.widthColThreePreview{
+    width: 140px !important;
+    padding-top: 8px;
+    padding-left: 45px;
+}
+.widthPreviewButton{
+    width: 110px !important
+}
+
+
+.buttonFormView{
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;   
+    font-size: 14px !important;
+    color:#fff;
+    font-weight: bolder;
+
+}
+.buttonFormViewdiv{
+    width:100%;
+    text-align: center;
+    padding-top: 45px;
+    padding-bottom: 100px;
+}
+
+.fileButtonForm{
+    width: 60%;
+    padding: 10px 10px 10px 10px;
+    color:#fff;
+    font-size: 14px;
+    font-weight: bolder;
+    border-radius: 8px;
+}
+.filebutton {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    border-radius: 8px;    
+    width: 47%;
+    padding: 0px 10px 10px 10px;
+    margin-bottom: 56px;
+    border: none !important;   
+    background: #f0f1f3 !important;
+    height: 50px;
+    border-radius:5px;
+    color:#6c757d !important;
+    
+}
+.fileInputLoading{
+/*opacity: 0.5;*/
+/*margin-left: 72px;
+margin-top: -42px;
+height: 35px;*/
+    height: 27px;    
+    width: 483px;    
+    margin-left: -15px;
+    font-size: 12px;
+    padding-top: 0px !important;
+    padding-bottom: 17% !important;
+}
+
+
+.paragraphformView{
+    background: #f8f8f8;
+    width: 45%;
+    padding-left: 5px;
+    margin-left: 29px;    
+    margin-bottom: 10px;
+    border-radius:5px;
+}
+
+.radioFormView{
+    width: 295px;
+    font-size: 14px !important;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius:5px;
+    margin-left: 41px;
+}
+
+.fileSingleView{
+    height: 30px !important;
+    padding-bottom: 38px !important;
+    padding-top: 9px !important;
+}
+.editformView{
+    padding-bottom: 19px !important;
+    padding-top: 20px;
+}
+
+.editbuttonFormView{
+    background: #ccc;
+    padding: 5px;
+    color: #7F7F7F;
+    float:right;
+    margin-right: 10px;
+}
+.containerFormPreview{
+    line-height:1.7em !important;
+    letter-spacing: 0.2;
+}
+
+
+
+
+
+
+
+
+@media only screen and (max-width:480px){
+    .content-box2 {columns: 1 auto;}
+    .widthdivSixCol{width:100%;}
+    .checkBoxbgcolor{ width:100% !important;}
+    .paragraphformView{ width:100% !important;}
+    .radioFormView{width:100% !important;}
+    .widthdivSixColPreview{width:100% !important; margin-right: 0px !important; margin-left: 0px !important;}
+    .widthColThreePreview{width:100% !important;  padding-left: 4px;}
+    .paragraphformView{margin-right: 37px !important;}
+    .radioFormView{width: 301px !important;}
+    .editformView{margin-left: 0px;}
+    .content-box{ padding-left: 28px;}
+    /*.mobileView{padding-left: 15px;}
+    .mobileViewInput{width:150px !important;}
+    .mobileViewLabel{width:145px !important;}*/
+
+}

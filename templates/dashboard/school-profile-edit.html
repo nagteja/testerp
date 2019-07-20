@@ -1,0 +1,220 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+<form action="/accounts/school-profile-edit/" class="padTable" method="POST"  enctype="multipart/form-data" >
+<div class="dashboard-content-one">
+    <!-- Breadcubs Area Start Here -->
+    <div class="breadcrumbs-area">
+        <h3>Teacher</h3>
+        <ul>
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>Edit School Profile</li>
+        </ul>
+    </div>
+    <!-- Breadcubs Area End Here -->
+    <!-- Student Table Area Start Here -->
+    <div class="card height-auto">
+        <div class="card-body">
+            <div class="heading-layout1">
+                <div class="item-title">
+                    <!-- <h3>About Me</h3> -->
+                </div>
+            </div>
+            <div class="col-md-12 container-fluid single-info-details schoolProfileContainer">
+                <div class="col-md-4 item-img" style="margin-right: 0px !important; text-align: center;">
+                    <img id="blah" src="{{school_check.0.school_images}}" alt="your logo" class="imgSizewidth imgBorerDisplay"/>
+
+                    <label class="btn-bs-file btn schoolbutton_2 imgInputpad">Browse Image
+                    <input type="file"  id="fileToUpload" value="" accept="image/*" onchange="readURL(this);upload_file(this.id)" >
+                    <input type="hidden" class="school_images" name="school_images">
+                </label>
+                </div>
+                <div class="col-md-9 item-content">
+                    <div class="header-inline item-header">
+                        <h3 class="text-dark-medium font-medium">{{sch_dl.school}}</h3>
+                        <!-- <div class="header-elements">
+                            <ul>
+                                <li><a href="/accounts/school-profile/"><i class="far fa-edit"></i></a></li>
+                                <li><a href="#"><i class="fas fa-print"></i></a></li>
+                                <li><a href="#"><i class="fas fa-download"></i></a></li>
+                            </ul>
+                        </div> -->
+                    </div>
+                    <textarea class="schoolProfileDescription" style="margin-bottom: 30px;" name="description">{{school_check.0.description}}</textarea>
+                    <div class="info-table table-responsive">
+                        <table class="table tableborder text-nowrap table-striped table-condense">
+                            <tbody>
+                                <tr class="schooltd">
+                                    <td class="tdpadding">Trust/Society</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium"><input type="text" placeholder="" name="trust" class="schoolInputBorder inputPadding" value={{school_check.0.trust}}></td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>Website</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium"><input type="text" placeholder="" name="website" class="inputPadding tdColor" value="{{school_check.0.website}}"></td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>School Type</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium"> <select class="schoolSelect schoolInputBorder inputPadding" name = "school_type">
+                                        <option value="">--select--</option>
+                                        {% for school_type in school_type %}
+                                        <option value="{{school_type.name}}" {% if school_type.name == school_check.0.school_type%} selected {% endif %}>{{school_type.name}}</option>
+                                        {% endfor %}
+                                    </select></td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>Medium of Instruction</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium"><input type="text"  class="inputPadding tdColor" placeholder="" name="medium" value="{{school_check.0.medium}}"></td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>Grade From</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium"><input type="text" class="inputPadding schoolInputBorder" placeholder="" name="grade_from" value={{school_check.0.grade_from}}></td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>Grade To</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium"><input type="text" class="inputPadding tdColor" placeholder="" name="grade_to" value={{school_check.0.grade_to}}></td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>School Landline</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium"><input type="text" class="inputPadding schoolInputBorder" placeholder="" name="landline" value={{school_check.0.landline}}></td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>School Address</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium"><textarea  class="inputPadding tdColor" placeholder="" name="address" value={{school_check.0.address}}>{{school_check.0.address}}</textarea></td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>Country</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">
+                                        <select class="js-example-basic-single countries width_size schoolInputBorder schoolSelect inputPadding" id="countryId" name="country" required>
+                                          <option value="">Select Country</option>
+                                          {% if school_check.0.country %}
+                                          <option value="{{school_check.0.country}}" selected="select">{{school_check.0.country}}</option>
+                                          {% else %}
+                                          <option value="">select Country</option>
+                                          {% endif %}
+                                         </select>
+                                    </td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>State</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">
+                                        <select name="state" class="js-example-basic-double states name_reg country_focus country_align reg_tab_half fname educator_half inputPadding schoolSelect tdColor" id="stateId" required="">
+                                          <option value="">Select state</option>
+                                          {% if school_check.0.state %}
+                                          <option value="{{school_check.0.state}}" selected="select">{{school_check.0.state}}</option>
+                                          {% else %}
+                                          <option value="">select State</option>
+                                          {% endif %}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>City</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">
+                                        <select name="city" class="js-example-basic-three cities name_reg country_focus country_align reg_tab_half fname educator_half schoolInputBorder schoolSelect inputPadding" id="cityId" required="">
+                                          <option value="">Select City</option>
+                                          {% if school_check.0.city %}
+                                          <option value="{{school_check.0.city}}" selected="select">{{school_check.0.city}}</option>
+                                          {% else %}
+                                          <option value="">select city</option>
+                                          {% endif %}
+                                        </select>
+                                    </td>
+                                </tr>                            
+                                <tr class="schooltd">
+                                    <td>Pincode</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium "><input type="text" class="inputPadding tdColor" placeholder="" name="pin" value={{school_check.0.pin}}></td>
+                                </tr>
+                                <tr><td class="trColorWhite"><button type="submit" class="signupbtn schoolbutton">Update</button></td></tr>
+                            </tbody>                           
+                        </table>
+                    <!-- <button type="submit" class="signupbtn schoolbutton">Update</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</form>
+<script>
+  $('.reg_str').addClass('selected');
+  $(document).ready(function() {
+    $('.js-example-basic-single').select2({
+      placeholder: "Select a country",
+  });
+});
+</script>
+<script>
+  $('.reg_str').addClass('selected');
+  $(document).ready(function() {
+    $('.js-example-basic-double').select2({
+      placeholder: "Select a state",
+  });
+});
+</script>
+<script>
+  $('.reg_str').addClass('selected');
+  $(document).ready(function() {
+    $('.js-example-basic-three').select2({
+      placeholder: "Select a city",
+  });
+});
+</script>
+<script>
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(270)
+                    .height(300);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+function upload_file(e){
+                                var form = new FormData();
+                                form.append("image", document.getElementById(e).files[0]);
+                                $.ajax({
+                                    url: "/module/uploadforms/",
+                                    type: "POST",
+                                    data:  form,
+                                    contentType: false,
+                                    processData:false,
+                                    success: function(data)
+                                    {
+                                        base_url = '{{ request.get_host }}';
+                                        $(".school_images").val("http://"+base_url+data);
+                                    },
+                                    error: function() 
+                                    {
+
+                                    }           
+                                });
+                }</script>
+<script src="{% static 'js/ajax-jquery.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".settings-subgroup").addClass("sub-group-active");
+        $(".school-profile").addClass("menu-active");
+    });
+</script>
+
+{% endblock %}

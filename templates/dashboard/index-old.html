@@ -1,0 +1,71 @@
+{% extends 'dashboard/header.html' %}
+{% block content %}
+<html>
+<head>
+    <title>formBuilder</title>
+</head>
+<style type="text/css">
+body {
+  padding: 0;
+  margin: 10px 0;
+  background: #f2f2f2 url('http://formbuilder.readthedocs.io/en/latest/img/noise.png');
+}
+.setDataWrap {
+  text-align: center;
+  margin-bottom: 10px;
+}</style>
+<body>
+  <form action="/dynamicforms/create/" id="form" method="POST">
+  {% csrf_token %}
+    <div id="fb-editor"></div>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+      <script src="http://formbuilder.online/assets/js/form-builder.min.js"></script>
+    <div class="setDataWrap">
+    </div>
+    <div id="build-wrap"></div>
+    <input type="hidden" name="form_details" id="form_details">
+    <button class="btn btn-success" type="submit" id="getJSON" >Save</button>
+    </form>
+    <script>
+      jQuery(function($) {
+        var fbEditor = document.getElementById('build-wrap');
+        var formBuilder = $(fbEditor).formBuilder();
+        document.getElementById('getJSON').addEventListener('click', function() {
+          
+          form_details = formBuilder.actions.getData('json');
+          for_details = $("#form_details").val(form_details);
+         
+event.preventDefault(); 
+  swal({
+      title: "Are you sure?",
+      text: "You will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: [
+        'No, cancel it!',
+        'Yes, I am sure!'
+      ],
+      dangerMode: true,
+    }).then(function(isConfirm) {
+      if (isConfirm) {
+        swal({
+          title: 'Shortlisted!',
+          text: 'Candidates are successfully shortlisted!',
+          icon: 'success'
+        }).then(function() {
+          $("#form").submit();
+            // <--- submit form programmatically
+        });
+      } else {
+        swal("Cancelled", "Your imaginary file is safe :)", "error");
+      }
+    })
+        });
+
+      });
+      
+    </script>
+</body>
+</html>
+{% endblock %}

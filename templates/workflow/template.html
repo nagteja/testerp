@@ -1,0 +1,114 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+<script src="{% static 'js/tinymce.min.js' %}"></script>
+<script>tinymce.init({selector:'textarea'});</script>
+ <div class="dashboard-content-one">
+    <!-- Breadcubs Area Start Here -->
+    <div class="breadcrumbs-area">
+        <h3>Templates</h3>
+        <ul>
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>Templates</li>
+        </ul>
+    </div>
+<div class="main_container marg">
+	<div class="table_container_row row marl">
+		<div class="col-md-10 col-sm-9 col-xs-12">
+			<div class="overview_form_block row marl">
+				<div class="col-md-12">
+					<form action="" method="POST" enctype="multipart/form-data">
+						<div class="card">
+							<div class="card-body col-md-12  col-sm-12 col-xs-12 ">
+								<div class="card-title col-md-12  col-sm-12 col-xs-12 ">
+									<h4>Create Email Template</h4>
+								</div>
+								<div class="row marl email_temp_pad_top col-md-12 paddingRightZero" style="padding-top: 35px;">
+									<div class="col-md-6 col-sm-12 col-xs-12 paddingRightZero">
+										<div class="filter_col col-md-12 paddingRightZero">
+											<div class="form-group paddingRightZero">
+											<table class="">
+												<tbody>
+													<tr>
+														<td style="width:48%"><label  class="tableFontSz">Template Name</label><span class="error tableFontSz">*</span></td>
+														<td style="width:50%"><input type="text" name="template" class="tableFontSz templateSelectBox"></td>
+													<tr>
+												</tbody>
+											</table>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-12 col-xs-12 ">
+										<div class="filter_col col-md-12">
+											<div class="form-group paddingRightZero">
+												<table class="">
+												<tbody>
+													<tr>
+														<td style="width:50%"><label  class="tableFontSz" style="padding-left:20px">Subject</label><span class="error tableFontSz">*</span>
+														<td style="width:50%"><input type="text" name="subject" class="tableFontSz templateSelectBox"></td>
+													<tr>
+												</tbody>
+											</table>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-12 col-xs-12 paddingRightZero">
+										<div class="filter_col col-md-12 paddingRightZero">
+											<div class="form-group paddingRightZero">
+												<table class="">
+												<tbody>
+													<tr>
+														<td style="width:50%"><label  class="tableFontSz">Module Name</label><span class="error tableFontSz">*</span></td>
+														<td style="width:50%"><select name="module" class="tableFontSz templateSelectBox" value="0">
+															<option value="select">Select Module</option>
+															{% for module in module %}										<option value="{{module.module.id}}">{{module.module.module}}</option>
+															{% endfor %}
+															</select>
+														</td>
+													<tr>
+												</tbody>
+											</table>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12 " style="margin-top: 30px;">
+										<div class="filter_col col-md-12">
+											<div class="form-group">
+												<!-- <label>Content</label> -->
+												<textarea name ="content"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12 marl buttons_row text-center form_btn_row  col-sm-12 col-xs-12 ">
+									<input type="hidden" name="created_by" value="{{request.user.id}}">
+									<button class="btn btn-warning save templateButtonSave" type="submit">Save</button>
+								</div>
+							</div>
+						</div>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	#id_template_name, #id_subject, #id_module_name{border-radius: 0px;width: 100%;background: none;border: 1px solid #ccc;height: 33px;border-top: none;border-left: none;border-right:none;border-bottom: 1px solid #ccc;}
+	div#mceu_30{width: 100% !important;}
+	.active a{color: #fff !important;}
+	ul .email li.active {background: grey; color: #fff !important;padding: 2%;}
+	ul.email{line-height: 2.5 !important;}
+	a{color: grey}
+</style>
+<script src="{% static 'js/ajax-jquery.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".settings-subgroup").addClass("sub-group-active");
+        $(".template-create").addClass("menu-active");
+    });
+</script>
+{% endblock %}

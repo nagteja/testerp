@@ -1,0 +1,181 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+ <link href="{% static 'css/dynamicform_style.css' %}" rel="stylesheet">
+ <style> .form-group,.form-control{
+ 	display: inherit;
+	}
+ 	input, textarea{
+ 		width: 300px !important;
+ 	}
+ 	.form-group .form-control {
+		background-color: #fff !important;
+    	padding-top: 0px !important;
+		padding-bottom: 20px !important;
+	}
+	.radioFormView{
+		background-color: #fff !important;
+		padding-top: 1px !important;
+	}
+	.widthColThreePreview{padding-top: 0px !important;}
+	label{color:#b7b7b7;}
+	.widthdivColPreview{padding-top: 0px !important;}
+	input[type="date"]:before { content: '' !important;}	
+ 	input[type="number"]{-moz-appearance: textfield;}
+ 	input[type="radio"], input[type="checkbox"],input[type="file"]{-moz-appearance: none;-webkit-appearance: none; appearance: none; padding-left: 0px}
+ 	.form-group {margin-bottom: 0px !important;
+}
+
+ </style>
+ 	<div class="breadcrumbs-area">
+        <h3>All Subjects</h3>
+        <ul>
+            <li>
+                <a href="../../../dashboard">Home</a>
+            </li>
+            <li>Form Preview</li>
+        </ul>
+    </div>
+	<div class="container preview1">		  
+		
+			<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>			
+			{% for i in answers %}
+			<form action="/module/form-individual/{{i.id}}/" method="POST"  class="preview1">
+			<div class="content-box">
+				
+	                <ul class="editformView">
+	                    <li><a class="editbuttonFormView" href="/module/form-individual/{{i.id}}"><i class="far fa-edit"></i></a></li>
+	                </ul>
+	            
+			<div id='form' class="col-12-md row containerFormPreview content-box-display split centered"></div>
+			<script type="text/javascript">
+				var form_fields = {{ i.form_field|safe }};
+				var save_for_details = {{ i.saved_form_details|safe }};
+				$(document).ready(function(){    
+					html = '';
+					for(i=0;i<form_fields.length;i++){
+						var fields = form_fields[i].type
+						if(form_fields[i].type=='checkbox-group'){
+							var fields="checkbox";
+						}
+						if(form_fields[i].type=='radio-group'){
+							var fields="radio";
+						}	
+						
+						if(form_fields[i].type=='header'){	
+							html += '<div class="col-12-md col-12-sm widthdivColPreview"> <'+form_fields[i].subtype+'>'+form_fields[i].label+'</'+form_fields[i].subtype+'></div>'
+						}/*else if(form_fields[i].type=='paragraph'){
+								html += '<div class="col-6-md col-12-sm widthdivSixColPreview paragraphformView"> <'+form_fields[i].subtype+'>'+form_fields[i].label+'</'+form_fields[i].subtype+'></div>'
+						}*/else if(form_fields[i].type=='checkbox-group' || form_fields[i].type=='radio-group' ){
+								html += '<div class="col-6-md  col-12-sm row form-group" style="width:50%;"><div class="col-3-md widthColThreePreview"><label for="'+form_fields[i].label+'">'+form_fields[i].label+'</label></div>:<div class="col-3-md  col-6-sm radioFormView" style="padding-left:60px;"">'
+								}
+						else{
+							for(k=0;k<save_for_details.length;k++){
+										if(form_fields[i].name == save_for_details[k].name){
+							html += '<div class="col-6-md col-12-sm row form-group" style="width:50%;"><div class="col-3-md  col-6-sm widthColThreePreview"><label for="'+form_fields[i].label+'">'+form_fields[i].label+'</label></div>:'
+								}
+							}
+						}						
+
+						if(fields=='select'){
+							for(k=0;k<save_for_details.length;k++){
+										if(form_fields[i].name == save_for_details[k].name){
+							html +=	'<div class="col-3-md col-6-sm widthColThreePreview"><p class="'+form_fields[i].className+'">'+save_for_details[k].value+'</p>';
+							// for(j=0;j<form_fields[i].values.length;j++){
+							// 	html += '<option value="'+form_fields[i].values[j].value+'">'+form_fields[i].values[j].label+'</option>'
+							// }
+							html +=	'</div></div><br>';
+								}							
+							}
+						}else if(form_fields[i].type=='checkbox-group' || form_fields[i].type=='radio-group' ){
+							for(j=0;j<form_fields[i].values.length;j++){
+								for(k=0;k<save_for_details.length;k++){
+										if(form_fields[i].name+"[]" == save_for_details[k].name){ 
+											if(save_for_details[k].value== j){
+												var checked =  "checked";
+												html += '<span class="" style="padding-right:10px;" type="'+fields+'"  id="'+form_fields[i].values[j].value+'"  '+checked+' name="'+form_fields[i].name+'[]" value="'+j+'"><label style="color:#000 !important;">'+form_fields[i].values[j].value+'</label></span>';
+											}else{
+												var checked =  "";
+											}
+								// html += '<input class="" style="width: 25px !important;" type="'+fields+'"  id="'+form_fields[i].values[j].value+'"  '+checked+' name="'+form_fields[i].name+'[]" value="'+j+'"><label>'+form_fields[i].values[j].value+'</label>';
+								 }
+							  	}
+							  	
+							}
+							html +='</div></div>'
+						}else if(form_fields[i].type=='textarea'){
+							for(k=0;k<save_for_details.length;k++){
+										if(form_fields[i].name == save_for_details[k].name){ 
+							html += '<div class="col-3-md col-6-sm widthColThreePreview"><p class="'+form_fields[i].className+'">'+save_for_details[k].value+'</p></div></div>';
+								}
+							}
+						}else if(form_fields[i].type == 'file'){
+							for(k=0;k<save_for_details.length;k++){
+								if(form_fields[i].name == save_for_details[k].name){ 
+							  		html += '<div class="col-3-md  col-6-sm widthColThreePreview" style="padding-left: 60px !important;overflow: hidden;"><a  href="'+save_for_details[k].value+'">'+save_for_details[k].value+'</a><input type="'+fields+'" style="opacity:0;" class="fileSingleView '+form_fields[i].className+'" onchange="upload_file(this.id)" id="'+form_fields[i].name+'" ><input type="hidden"  class="'+form_fields[i].name+'"  name="'+form_fields[i].name+'"></div></div>';
+							  }
+							 }
+						}else if(form_fields[i].type == 'date'){
+							for(k=0;k<save_for_details.length;k++){
+								if(form_fields[i].name == save_for_details[k].name){ 
+									html += '<div class="col-3-md col-6-sm widthColThreePreview"><p class="'+form_fields[i].className+'">'+save_for_details[k].value+'</p></div></div>';
+								}
+							}
+						}else{
+							for(k=0;k<save_for_details.length;k++){
+								if(form_fields[i].name == save_for_details[k].name){ 
+									html += '<div class="col-3-md col-6-sm widthColThreePreview"><p class="'+form_fields[i].className+'">'+save_for_details[k].value+'</p></div></div>';
+									}
+								}	
+						}
+						}
+							html += '<br></div></form></body></html>';
+							$('#form').html(html);
+
+						});
+				function checking(){
+					$('form').each(
+						function(index){  
+							var input = $(this).serializeArray();
+									        	$('#results').val(JSON.stringify(input));
+									        	//event.preventDefault();
+									        });
+				}
+				function upload_file(e){
+								var form = new FormData();
+								form.append("image", document.getElementById(e).files[0]);
+								$.ajax({
+									url: "/module/uploadforms/",
+									type: "POST",
+									data:  form,
+									contentType: false,
+									processData:false,
+									success: function(data)
+									{
+										base_url = '{{ request.get_host }}';
+										$("."+e).val("http://"+base_url+data);
+									},
+									error: function() 
+									{
+
+									} 	        
+								});
+				}
+			</script>
+			{% endfor %}
+<script src="{% static 'js/ajax-jquery.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var display_form = "{{display_form.module.module}}";        
+        if(display_form=='admissions'){
+            $(".admissions").addClass("menu-active");
+        }else if(display_form=='inquiries'){
+            $(".inquiries").addClass("menu-active");
+        }else{
+
+            $(".applications").addClass("menu-active");
+        }
+    });
+</script>   
+{% endblock %}
+

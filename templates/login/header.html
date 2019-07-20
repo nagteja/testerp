@@ -1,0 +1,155 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+ 	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">  	
+  	<link rel=" icon" href="/static/images/Favicon.png" />
+  	<!-- All css links -->
+  	<link rel="stylesheet" href="{% static 'bootstrap-4-3-1/css/bootstrap.min.css' %}">  	
+  	<link rel="stylesheet" href="{% static 'css/home_pg.css' %}">
+  	<link rel="stylesheet" href="{% static 'css/roles_style.css' %}">
+  	<!-- 	<link rel="stylesheet" href="{% static 'fontawesome/css/font-awesome.min.css' %}"> -->
+	<link rel="icon" href="{% static 'font/caviar-dreams_5bfbff4c8f74644edf23f16e8730fe49.woff' %}"  type="image/x-icon">
+  	<!--font family-->
+	<link href="{% static 'font/caviar-dreams.css' %}" rel="stylesheet" type="text/css" />
+	<!--dropdown-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'fontawesome/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'fontawesome/Caviar-Dreams' %}">
+
+  	<!-- All js links -->
+  	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="{% static 'bootstrap-4-3-1/js/bootstrap.min.js' %}"></script>  	
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+  	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113582165-2"></script>
+	<script>
+	 window.dataLayer = window.dataLayer || [];
+	 function gtag(){dataLayer.push(arguments);}
+	 gtag('js', new Date());
+
+	 gtag('config', 'UA-113582165-2');
+	</script>
+	</head>
+	<body>
+		<!-- Navbar START -->
+		<nav class="navbar navbar-expand-sm bg-light navbar-light movebottom" style="border-bottom: 3px solid #f5791f;">
+			<div class="col-md-12 col-sm-12 col-xs-12 container-fluid nopadding">				
+				<div class="col-md-2 col-sm-2 col-xs-6 header_image nopadding">
+					<div class="logo" style="padding-left: 75px;">	
+						<a href="/"><img class="logo_image" src="/static/images/logo.png"></a>
+					</div>
+				</div>				
+				<div class="col-md-7 col-sm-7 col-xs-12 iconic_header header_button">
+					<ul class="navbar-nav">						
+						<li class="nav-item"><a class="nav-link" href="#"><b>Home</b></a></li>
+						<li class="nav-item"><a class="nav-link" href="#"><b>Features</b></a></li>
+						<li class="nav-item"><a class="nav-link" href="#"><b>Company</b></a></li>
+						<li class="nav-item"><a class="nav-link" href="#"><b>Support</b></a></li>
+						<li class="nav-item"><a class="nav-link" href="#"><b>Contact</b></a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-12">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a href="/login/" style="padding-top: 12px;" class="nav-link" data-toggle="modal" data-target="#modalLoginForm">
+								<b class="login_color">Login</b></a></li>
+						<div id="modalLoginForm" class="modal fade">
+					        <div class="modal-dialog" style="margin-top: 115px;">
+					            <div class="modal-content" style="width: 415px;">
+					            	
+					            </div>
+					        </div>
+						 </div>
+						<li class="nav-item"><a class="nav-link" href="#registerFree"><button class="register_button"><b>Register <i>Free</i></b></button></a></li>
+					</ul>
+				</div>
+				<div class="col-md-8 col-sm-8 col-xs-6 mob_view_bar icon">
+			        <h5 class="mob_line_icons" ><button class="mob_btn_icon"><i style="font-size: 24px;" class="fa fa-align-justify" aria-hidden="true"></i></button></h5>
+			        <ul class="mob_ul_list" style="list-style-type: none;">
+			        	<li><a class="homelist_select" href="#"><b>Home</b></a></li>
+						<li><a class="homelist_select" href="#"><b>Features</b></a></li>
+						<li><a class="homelist_select" href="#"><b>Company</b></a></li>
+						<li><a class="homelist_select" href="#"><b>Support</b></a></li>
+						<li><a class="homelist_select" href="#"><b>Contact</b></a></li>
+						<li><a class="homelist_select" href="#"><b class="login_color">login</b></a></li>
+						<li class="nav-item"><a class="nav-link" href="#registerFree"><button class="register_button">Register Free</button></a></li>			            
+			        </ul>			       
+			    </div>				
+			</div>			
+		</nav>
+		<!-- Navbar END -->
+		{% block content %}{% endblock %}
+					
+
+		<!-- Footer START -->
+		<div class="container col-md-12 col-sm-12 col-xs-12" style="background-color: #242424 !important;">
+			<div class="container-fluid nopadding sc_border" style="padding-top: 2%;">				
+				<div class="col-md-12 col-sm-12 col-xs-12" style="font-family: 'Open Sans',sans-serif;">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">														
+							<a class="foot_links service_move" href="#">Home</a><br>
+							<a class="foot_links service_move" href="#">Features</a><br>
+							<a class="foot_links service_move" href="#">Company</a><br>
+							<a class="foot_links service_move" href="#">Support</a><br>
+							<a class="foot_links service_move" href="#">Contact</a><br>
+						</div>
+						<div class="col-md-6 col-sm-4 col-xs-12 address_foot road nopadding">
+							<p style="color: #fff;"><b>School Serv (India) Solutions Pvt. Ltd.</b><br>
+								Opp to MIMS Crescenta, Main Road, Kannamangala Village, Bidarahalli Hobli, Whitefield, Bangalore 560115, Karnataka, India<br></p>
+						 	<div style="margin-top: 15px;">
+						 		<p style="color: #fff; margin-bottom: 0px !important;"><i class="fa fa-phone" style="transform:rotate(280deg); font-size: 18px;"></i> +91 95133 77282/ 83/ 84/ 85 | ( 9AM - 6 PM | Mon - Fri )</p>						 			
+					 		</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container col-md-12 col-sm-12 com-xs-12 schoolborder_size">
+				<div class="row">
+					<div class="col-md-5 col-sm-5 col-xs-12" style="color: #fff">
+			    	 	<h5 class="foot_text">@ 2019 School Serv (India) Solutions Pvt. Ltd. All rights reserved</h5>
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-12 social_fix foot_text" style="padding-left: 10px; text-align: center;">
+						<a href="https://www.facebook.com/schoolserv/" target="_blank" class="social_icons_color" style="padding-right: 10px;"><i class="fa fa-facebook-square fa-2x  book" aria-hidden="true"></i></a>
+					    <a href="https://twitter.com/schoolserv/" target="_blank" class="social_icons_color" style="padding-right: 10px;"><i class="fa fa-twitter-square fa-2x  book" aria-hidden="true"></i></a>
+					    <a href="https://www.linkedin.com/company/school-serv-india-solutions-private-limited/" target="_blank" class="social_icons_color"><i class="fa fa-linkedin-square fa-2x  book" aria-hidden="true"></i></a>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12 social_fix contact_privacy foot_text" style="text-align: right;">
+						<a href="/Contact-Us/" target="blank" class="home">Contact Us
+					    	</a> <span style="color: #fff";>|</span>
+				    	<a href="/Privacy-Policy/" class="home">Privacy</a> <span style="color: #fff";>|</span>
+				    	<a href="/Terms-and-Conditions/" class="home">Terms and Conditions</a>
+					</div>
+				</div>
+			</div>
+				<!-- <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css"> -->
+				<!-- <p id="myChat" class="chat_robot shake-slow shake-constant shake-constant--hover image_roboshake">
+				    <a href="/Contact-Us/" target="blank"><img title="Contact Us" style="width: auto; height: auto;" src="/static/images/chat-logo-with-robot-facenew-02-01.png"></a>
+				</p>\ -->				
+		</div>
+	<!-- Footer END -->
+	
+</body>
+</html>
+<script>
+$(document).ready(function(){
+	$(".features").mouseover(function(){
+            $(this).addClass('visible');
+        });
+ 
+	$(".features").mouseout(function(){
+            $(this).removeClass('visible');
+        });
+    });
+
+    $(".mob_ul_list").hide();
+    $(document).ready(function(){
+        $(".mob_btn_icon").click(function(){
+            $(".mob_ul_list").toggle();
+        });
+    });
+</script>

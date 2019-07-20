@@ -1,0 +1,272 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+<div class="dashboard-content-one">
+    <!-- Breadcubs Area Start Here -->
+    <div class="breadcrumbs-area">
+        <h3>My Profile</h3>
+        <ul>
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>My Profile</li>
+        </ul>
+    </div>
+    <div class="card height-auto">
+        <div class="card-body">
+            <div class="col-md-12 container-fluid single-info-details schoolProfileContainer" id="userProfilePreview" style="margin-right: 0px !important;">
+                <div class="item-img">
+                    <img class="imgSizewidth imgBorerDisplay" src="/media/{{user.profile.images}}">
+                </div>
+                <div class="item-content">
+                    <div class="header-inline item-header">
+                        <h3 class="text-dark-medium font-medium">{{myprofile.0.first_name}} {{myprofile.0.last_name}}</h3>
+                        <div class="header-elements">
+                            <ul>
+                                <li><a class=""  id="userProfileEdit" href="#" role="button"  data-toggle="modal" data-target=""  aria-expanded="false"><i class="far fa-edit"></i></a></li>                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="padTable info-table table-responsive">
+                        <table class="table text-nowrap table-striped table-condensed" style="margin-left: 10px;">
+                            <tbody>
+                                <!-- <tr class="schooltd">
+                                    <td>School Name</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{user.profile.school}}</td>
+                                </tr> -->
+                                <tr class="schooltd">
+                                    <td>Email</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{myprofile.0.email}}</td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>Mobile</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{user.profile.mobile}}</td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>Gender</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{user.profile.gender}}</td>
+                                </tr> 
+                                <tr class="schooltd">
+                                    <td>Date of Birth</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{user.profile.dob}}</td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>Religion</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{user.profile.religion}}</td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>Blood Group</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{user.profile.blood_group}}</td>
+                                </tr>
+                                 <tr class="schooltd">
+                                    <td>Address</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{user.profile.address}}</td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>Country</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{user.profile.country}}</td>
+                                </tr>
+                                <tr class="schooltd">
+                                    <td>State</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{user.profile.state}}</td>
+                                </tr>
+                                 <tr class="schooltd">
+                                    <td>City</td>
+                                    <td>:</td>
+                                    <td class="font-medium text-dark-medium">{{user.profile.city}}</td>
+                                </tr>                          
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> 
+            <form method="POST" action="/accounts/myprofile/" >      
+                <div class="col-md-12 container-fluid single-info-details schoolProfileContainer" id="myProfileEdit_Block">
+                    <div class="col-md-4 item-img" style="margin-right: 0px !important; text-align: center;">
+                        <img id="blah" src="/media/{{user.profile.images}}" alt="your profile pic" class="imgSizewidth imgBorerDisplay"/>
+
+                        <label class="btn-bs-file btn schoolbutton_2 imgInputpad">Browse Image
+                        <input type="file"  id="fileToUpload" value="" accept="image/*" onchange="readURL(this);upload_file(this.id)" >
+                        <input type="hidden" class="school_images" name="myimages">
+                    </label>
+                    </div>
+                    <div class="col-md-9 item-content">
+                        <div class="header-inline item-header">
+                            <h3 class="text-dark-medium font-medium">{{user.first_name}} {{user.last_name}}</h3>
+                        </div>                    
+                        <div class="info-table table-responsive">
+                            <table class="table tableborder text-nowrap table-striped table-condense">
+                                <tbody>
+                                    <!-- <tr class="schooltd">
+                                        <td>School Name</td>
+                                        <td>:</td>
+                                        <td class="font-medium text-dark-medium">{{user.profile.school}}</td>
+                                    </tr> -->
+                                    <tr class="schooltd">
+                                        <td>Email</td>
+                                        <td>:</td>
+                                        <td class="font-medium text-dark-medium">{{user.email}}</td>
+                                    </tr>                               
+                                    <tr class="schooltd">
+                                        <td>Mobile</td>
+                                        <td>:</td>
+                                        <td class="font-medium text-dark-medium"><input type="tel" class="inputPadding schoolInputBorder tdColor" placeholder="" name="mymobile" value={{user.profile.mobile}}></td>
+                                    </tr>
+                                    <tr class="schooltd">
+                                        <td>Gender</td>
+                                        <td>:</td>
+                                        <td class="font-medium text-dark-medium"><select class="modalSelectBlock" style="margin-bottom: 0px !important;"  name="mygender">
+                                            <option>{{user.profile.gender}}</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="others">Others</option>
+                                        </select></td>
+                                    </tr> 
+                                    <tr class="schooltd">
+                                        <td>Date of Birth</td>
+                                        <td>:</td>
+                                         <td class="font-medium text-dark-medium"><input type="date" placeholder="Date of Birth" name="mydob" class="borderRadiusInput" value="{{user.profile.dob|date:'Y-m-d'}}"  style="width: 100%;"></td></td>
+                                    </tr>
+                                    <tr class="schooltd">
+                                        <td>Religion</td>
+                                        <td>:</td>
+                                        <td class="font-medium text-dark-medium "><input type="text" class="inputPadding schoolInputBorder tdColor" placeholder="" name="myreligion" value={{user.profile.religion}}></td>
+                                    </tr>
+                                    <tr class="schooltd">
+                                        <td>Blood Group</td>
+                                        <td>:</td>
+                                        <td class="font-medium text-dark-medium"><input type="text" class="inputPadding schoolInputBorder" placeholder="" name="mybloodgroup" value={{user.profile.blood_group}}></td>
+                                    </tr>
+                                    <tr class="schooltd">
+                                        <td>School Address</td>
+                                        <td>:</td>
+                                        <td class="font-medium text-dark-medium"><textarea  class="inputPadding tdColor" placeholder="" name="myaddress" value={{user.profile.address}}>{{user.profile.address}}</textarea></td>
+                                    </tr>
+                                    <tr class="schooltd">
+                                        <td>Country</td>
+                                        <td>:</td>
+                                        <td class="font-medium text-dark-medium">
+                                            <select class="js-example-basic-single countries width_size schoolInputBorder schoolSelect inputPadding" id="countryId" name="mycountry" required>
+                                              <option value="">Select Country</option>
+                                              {% if user.profile.country %}
+                                              <option value="{{user.profile.country}}" selected="select">{{user.profile.country}}</option>
+                                              {% else %}
+                                              <option value="">select Country</option>
+                                              {% endif %}
+                                             </select>
+                                        </td>
+                                    </tr>
+                                    <tr class="schooltd">
+                                        <td>State</td>
+                                        <td>:</td>
+                                        <td class="font-medium text-dark-medium">
+                                            <select name="mystate" class="js-example-basic-double states name_reg country_focus country_align reg_tab_half fname educator_half inputPadding schoolSelect tdColor" id="stateId" required="">
+                                              <option value="">Select state</option>
+                                              {% if user.profile.state %}
+                                              <option value="{{user.profile.state}}" selected="select">{{user.profile.state}}</option>
+                                              {% else %}
+                                              <option value="">select State</option>
+                                              {% endif %}
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr class="schooltd">
+                                        <td>City</td>
+                                        <td>:</td>
+                                        <td class="font-medium text-dark-medium">
+                                            <select name="mycity" class="js-example-basic-three cities name_reg country_focus country_align reg_tab_half fname educator_half schoolInputBorder schoolSelect inputPadding" id="cityId" required="">
+                                              <option value="">Select City</option>
+                                              {% if user.profile.city %}
+                                              <option value="{{user.profile.city}}" selected="select">{{user.profile.city}}</option>
+                                              {% else %}
+                                              <option value="">select city</option>
+                                              {% endif %}
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="trColorWhite"><button type="submit" class="signupbtn schoolbutton">Update</button></td></tr>
+                                </tbody>                           
+                            </table>
+                        <!-- <button type="submit" class="signupbtn schoolbutton">Update</button> -->
+                    </div>
+                </div>
+            </form>
+        </div>    
+    </div>
+</div>
+
+<script src="{% static 'erp/js/jquery.ajax.min.js' %}"></script>
+<script>
+  $('.reg_str').addClass('selected');
+  $(document).ready(function() {
+
+    $("#myProfileEdit_Block").hide();
+    $("#userProfileEdit").on('click', function() {
+        $('#userProfilePreview').hide();
+        $('#myProfileEdit_Block').show();
+    });
+    $("#userProfileUpdate").on('click', function() {
+        $('#userProfilePreview').show();
+        $('#myProfileEdit_Block').hide();
+    });
+
+
+    $('.js-example-basic-single').select2({
+      placeholder: "Select a country",
+    });
+    $('.js-example-basic-double').select2({
+      placeholder: "Select a state",
+    });
+    $('.js-example-basic-three').select2({
+      placeholder: "Select a city",
+    }); 
+    
+});
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah')
+                .attr('src', e.target.result)
+                .width(270)
+                .height(300);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function upload_file(e){
+    var form = new FormData();
+    form.append("image", document.getElementById(e).files[0]);
+    $.ajax({
+        url: "/module/uploadforms/",
+        type: "POST",
+        data:  form,
+        contentType: false,
+        processData:false,
+        success: function(data)
+        {
+            base_url = '{{ request.get_host }}';
+            $(".school_images").val("http://"+base_url+data);
+        },
+        error: function() 
+        {
+
+        }           
+    });
+}
+</script>
+{% endblock %}

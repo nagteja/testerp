@@ -1,0 +1,111 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+  <!--workflow css-->
+<link href="{% static 'workflow/css/workflowstyle.css' %}" rel="stylesheet">
+<script src="{% static 'js/jquery-1-11-3/jquery-1.11.3.min.js' %}"></script>
+	<div class="col-md-10 col-sm-12 col-xs-12 no_padding margin-top">
+		<div class="container">
+			<form class="form-main" action="/workflow/workflowsave/{{rule.id}}/" method="POST">	
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="container form-block table_pad_top row">
+						<!-- <div class="row"> -->
+							<div class="col-md-3">
+								<div class="when_blk text_capital font_when14">When</div>
+								<span class="when_line"></span>
+								<input type="hidden" name="rule_when_value" value="{{rule.when}}" id="rule_when_value">
+							</div>
+							<div class="col-md-9 pad_2 bg_white margin-top1 workflow_font">
+								<!-- <div class=""> -->
+									<div class="filter_col col-md-12 form-group" id="rule_form1">
+										<label>When do you want to execute this rule?</label><br/>
+									</div>	
+									<div class="col-md-12">
+										{% for i in recordaction %}
+											<p><input type="radio" name="record_action" value="{{i.actions}}" class="rule_id1"> {{ i.actions }}</p>
+										{% endfor %}
+									</div>									
+								<!-- </div>	 -->								
+							</div> 
+						<!-- </div> --> 
+					</div>
+					<div class="table_pad_top row" id="form22" style="padding-left: 13px;">
+						<div class="col-md-3" style="margin-right: -10px;">
+							<div class="when_blk when_diamond">
+								<span class="text_capital diamond_text font_when14">Condition</span>
+							</div>
+							<span class="diamond_line"></span>
+						</div>
+						<div class="col-md-9 bg_white pad_2 workflow_font"  style="padding-left:5%;">
+							<label>Which Inquiries would you like to apply the rule to?</label>
+							<div class="form-block_1 row deleteRow">
+									<div class="col-md-4 row margin_top_2">
+										<select name="leads_action[]" class="width_40_p" id="element1">
+											{% for i in leads %}
+											<option value="{{ i.name }}">{{ i.actions }}</option>
+											{% endfor %}
+										</select>							
+									</div>	
+									<div class="col-md-3 row margin_top_2">
+										<select class="width_40_p" name="leads_condition[]">
+											{% for i in leads_condition %}
+											<option value="{{ i.actions}}">{{ i.actions }}</option>
+											{% endfor %}
+										</select>
+									</div>
+									<div class="col-md-4 row margin_top_2">
+										<input type="text" class="width_40_p" name="condition[]">
+									</div>
+								<div class="col-md-1 row margin_top_2 deleteRowRule">
+									<button type="button" class="btn-danger" style="margin-left:50px; padding:0 !important; width:100px;"><span class="span_edit_delete" style="font-size: 25px;"><i class="fa fa-trash" aria-hidden="true"></i></span></button>
+								</div>
+							</div>
+							<div id="form-new" class="no_pad_margin"></div>
+							<div class="col-md-12 pad_top">
+								<a class="btn btn-primary add-more-btn addDeleteButton">Add</a>
+								<input type="submit" value="save"  class="btn btn-success next_step_btn addDeleteButton">
+							</div>
+													
+						</div>
+
+					</div>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.add-more-btn').click(function() {
+			var clone = $('.form-block_1:first').clone();
+			$('#form-new').append(clone);
+		});
+
+		$('#form22').hide();
+		$('.rule_id1').click(function(){
+			$('span.when_line').addClass('next_line');
+			$('#form22').show();
+		});
+
+
+
+	});
+
+
+
+// $('.rule_id1').on('change', function(){
+// 	$('#form22').show();
+// });
+$('div').on('click', '.deleteRowRule', function() {
+    $(this).parents(".deleteRow").remove();
+});
+
+</script>
+<script src="{% static 'erp/js/jquery.ajax.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(".settings-subgroup").addClass("sub-group-active");
+        $(".workflow").addClass("menu-active");
+   });
+</script> 
+{% endblock %}

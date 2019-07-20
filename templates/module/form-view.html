@@ -1,0 +1,155 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+            <div class="dashboard-content-one">
+                <!-- Breadcubs Area Start Here -->
+                <div class="breadcrumbs-area">
+                    <h3>User Details</h3>
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>Roles</li>
+                    </ul>
+                </div>
+                <!-- Breadcubs Area End Here -->
+                <!-- Student Table Area Start Here -->
+                <div class="card height-auto">
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>All Students Data</h3>
+                            </div>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="/module/list/{{dynamic_forms.module.module}}/" role="button"
+                                    aria-expanded="false"><i class="fa fa-plus-circle addButtonColor" aria-hidden="true"></i></a>
+                                <!-- <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#"><i
+                                            class="fas fa-times text-orange-red"></i>Close</a>
+                                    <a class="dropdown-item" href="#"><i
+                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                    <a class="dropdown-item" href="#"><i
+                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                </div> -->
+                            </div>
+                        </div>
+                        <form class="mg-b-20">
+                            <div class="row gutters-8">
+                                <!-- <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <input type="text" placeholder="Search by Roll ..." class="form-control">
+                                </div> -->
+                               <!--  <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                    <input type="text" placeholder="Search by Name ..." class="form-control">
+                                </div> -->
+                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <input type="text"  class="form-control">
+                                </div>
+                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                </div>
+                            </div>
+                        </form>
+                         <div class="table-responsive">
+                            <table class="table display data-table text-nowrap">
+                                <thead>
+                                    <tr>                                      
+                                        <th>Si No</th>
+                                        <th>Name</th>
+                                        <th>Class</th> 
+                                        <th>Section</th>
+                                        <th>Date of Birth</th>                                      
+                                        <th>Parent Name</th>                                        
+                                        <th>Phone</th> 
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody id='form'>
+                                    
+                               </tbody>
+                            </table>
+                        </div>
+                       
+                        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>     
+                        {% for i in form_view %}
+
+                             <script type="text/javascript">
+                                 $(document).ready(function(){
+                                    var form_fields = {{ i.form_field|safe }};
+                                    var save_for_details = {{ i.saved_form_details|safe }};
+                                    var roll, name, classname, email, dob, phone, parent, section;
+                                    var sno = 0;
+                                    html = '';
+                                    html += '<tr class="odd"  role="row">';                     
+                                    for(i=0;i<form_fields.length;i++){
+                                        if(form_fields[i].name=='studentname'){ 
+                                           for(k=0;k<save_for_details.length;k++){
+                                                if(form_fields[i].name == save_for_details[k].name){ 
+                                                    name = '<a href="/module/form-individual-profile/{{i.id}}/" >'+save_for_details[k].value+'</a>';
+                                                    }
+                                                }   
+                                            }
+                                        if(form_fields[i].name=='classname'){ 
+                                           for(k=0;k<save_for_details.length;k++){
+                                                if(form_fields[i].name == save_for_details[k].name){ 
+                                                     classname = save_for_details[k].value;
+                                                    }
+                                                }   
+                                            }
+                                        if(form_fields[i].name=='section'){ 
+                                           for(k=0;k<save_for_details.length;k++){
+                                                if(form_fields[i].name == save_for_details[k].name){ 
+                                                     section = save_for_details[k].value;
+                                                    }
+                                                }   
+                                            }                            
+                                        if(form_fields[i].name=='parentsname'){ 
+                                           for(k=0;k<save_for_details.length;k++){
+                                                if(form_fields[i].name == save_for_details[k].name){ 
+                                                    parent =save_for_details[k].value;
+                                                    }
+                                                }   
+                                         }
+                                        if(form_fields[i].name=='dob'){ 
+                                           for(k=0;k<save_for_details.length;k++){
+                                                if(form_fields[i].name == save_for_details[k].name){ 
+                                                     dob =save_for_details[k].value;
+                                                    }
+                                                }   
+                                            }
+                                        if(form_fields[i].name=='phone'|| form_fields[i].name=='mobile'){ 
+                                           for(k=0;k<save_for_details.length;k++){
+                                                if(form_fields[i].name == save_for_details[k].name){ 
+                                                    phone = save_for_details[k].value;
+                                                    }
+                                                }   
+                                            }
+                                        if(form_fields[i].name=='email'){ 
+                                           for(k=0;k<save_for_details.length;k++){
+                                                if(form_fields[i].name == save_for_details[k].name){ 
+                                                    email = save_for_details[k].value;
+                                                    }
+                                                }   
+                                            }   
+                                        }
+                                    html += '<td>'+{{forloop.counter}}+'</td><td>'+name+'</td><td>'+classname+'</td><td>'+section+'</td><td>'+dob+'</td><td>'+parent+'</td><td>'+phone+'</td><td>'+email+'</td></tr>'; 
+                                    $('#form').append(html);                                    
+                                });
+                            </script>
+                        {% endfor %}
+
+                    </div>
+                </div>
+<script src="{% static 'js/ajax-jquery.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var display_form = "{{form_view.0.module}}";
+        if(display_form=='admissions'){
+            $(".admissions").addClass("menu-active");
+        }else if(display_form=='inquiries'){
+            $(".inquiries").addClass("menu-active");
+        }else{
+            $(".applications").addClass("menu-active");
+        }
+    });
+</script>            
+{% endblock %}

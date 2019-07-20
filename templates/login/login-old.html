@@ -1,0 +1,28 @@
+{% extends 'login/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <h2>Login</h2>
+  <form method="post" >
+    {% csrf_token %}<!-- 
+    {{ form.as_p }} -->
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" id="id_username" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" id="id_password" required>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="{% url 'password_reset' %}">password?</a></span>
+     <span class="psw">signup <a href="{% url 'accounts:signup' %}">signup?</a></span>
+  </div>
+    <button type="submit">Login</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,297 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+  <!--workflow css-->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="{% static 'workflow/css/workflowstyle.css' %}" rel="stylesheet">
+<script src="{% static 'js/jquery-1-11-3/jquery-1.11.3.min.js' %}"></script>
+	<div class="col-md-10 col-sm-12 col-xs-12 no_padding margin-top">
+		<div class="container">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="table_pad_top row">
+					<div class="container form-block row">
+						<div class="col-md-3">
+							<div class="when_blk text_capital font_when14">When</div>
+							<span class="when_lineOne"></span>
+							<input type="hidden" name="rule_when_value" value="{{rule.when}}" id="rule_when_value">
+						</div>
+						<div class="col-md-9 pad_2 bg_white margin-top1 workflow_font">
+							<div class="filter_col col-md-12">
+								<div class="form-group" id="rule_form1">
+									<label>This rule will be executed when you {{when.when}} the {{rule}} </label><button class="plain_btn_bg pull-right" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i></button></h6>
+								</div>
+							</div>									
+						</div> 
+						<form class="form-main2" action="/workflow/when-update/{{rule.id}}/" method="POST">
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<!--Content-->
+								<div class="modal-content form-elegant">
+									<!--Header-->
+									<div class="modal-header text-center">
+
+									</div>
+									<div class="modal-body mx-4 col-md-12">
+										<div class="form-group row" id="rule_form1">
+											<label>When do you want to execute this rule? </label><br/>
+											<span class="pad_2"></span>
+											<div class="col-md-12">
+												{% for i in recordaction %}
+												<p><input type="radio" name="record_action" value="{{i.actions}}"
+													{% if i.actions == when.when %} checked {% endif %}
+													class="rule_id1"> {{ i.actions }}</p>
+													{% endfor %}
+											</div>
+										</div>
+											<div class="col-md-2">
+												<input type="submit" name="submit" value="Save" class="btn btn-primary save_btn_desgn">
+											</div>
+										</div>
+									</div>
+									<!--/.Content-->
+								</div>
+							</div>
+						</form>
+					</div> 
+				</div>
+				<div class="table_pad_top row"  style="margin-top: 30px;" id="form22">
+					<div class="col-md-12 row">
+						<div class="col-md-3 diamon_margin_top">
+							<div class="when_blk when_diamond">
+								<span class="text_capital diamond_text font_when14">Condition</span>
+							</div>
+							<span class="diamond_lineOne"></span>
+						</div>
+						<div class="col-md-9 bg_white pad_2 workflow_font" style="padding-left:5%;">
+							<label>Which Inquiries would you like to apply the rule to?</label>
+								<div class="col-md-12 row margin_top_2" style="padding-left:15px; margin-bottom: 1%">
+								{% for when_leads in when_leads %}								
+									<div class="col-md-8 row">
+										<td>{{when_leads.actions}}</td>
+										<td>{{when_leads.condition_arthimatic}}</td>
+										<td>{{when_leads.condition}}</td>
+									</div>									
+									<td>
+										<!-- <div class="col-md-4 row"> -->
+											<div class="col-md-2 bs-example">
+											    <a href="/workflow/condition-edit/{{when_leads.id}}/{{rule.id}}/" class="span_edit" data-toggle="modal" data-target="#myModal1"><button type="button" class="btn-info"><span class="span_edit"><i class="fa fa-pencil"></i></span></a></button>
+											    <div id="myModal1" class="modal fade" role="dialog">
+											        <div class="modal-dialog">
+											            <div class="modal-content">
+											            	
+											            </div>
+											        </div>
+											    </div>
+											</div>
+											<div class="col-md-2 bs-example">
+												<a href="/workflow/condition-delete/{{when_leads.id}}/{{rule.id}}/">&#x00A0;<button type="button" class="btn-danger"><span class=""><i class="fa fa-trash" aria-hidden="true"></i></span></button></a>
+											</div>
+									<!-- 	</div> -->
+									</td>									
+								
+								{% endfor %}						
+							</div>
+							<form class="form-main" action="/workflow/new-workflow-condition/{{rule.id}}/" method="POST">	
+								<div class="form-block_1 row deleteRow" style="padding-bottom: 15px;">
+									<div class="col-md-4 row margin_top_2">
+										<select name="leads_action[]" class="width_40_p" id="element1">
+											{% for i in leads %}
+											<option value="{{ i.name }}">{{ i.actions }}</option>
+											{% endfor %}
+										</select>							
+									</div>	
+									<div class="col-md-3 row margin_top_2">
+										<select class="width_40_p" name="leads_condition[]">
+											{% for i in leads_condition %}
+											<option value="{{ i.actions}}">{{ i.actions }}</option>
+											{% endfor %}
+										</select>
+									</div>
+									<div class="col-md-4 row margin_top_2">
+										<input type="text" class="width_40_p" name="condition[]">
+									</div>
+									<div class="col-md-1 row margin_top_2 deleteRowRule">
+										<button type="button" class="btn-danger span_edit_delete" style="margin-left:50px;"><span class="" style="font-size: 25px;"><i class="fa fa-trash" aria-hidden="true"></i></span></button>
+									</div>
+								</div>
+								<div id="form-new" class="no_pad_margin"></div>
+								<div class="col-md-12 pad_top">
+									<a class="btn btn-primary add-more-btn addDeleteButton">Add</a>
+									<input type="submit" value="save"  class="btn btn-success next_step_btn addDeleteButton">
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		<!-- Modal -->
+			<div class="col-md-12 row">
+				<div class="text-center col-md-6 rect_box light_grey_bg" style="margin-top: 6%;" id="instant_action">			
+					<p><a href="" data-toggle="modal" class="text_decor" data-target="#instanttModalForm">Instant actions</a></p>
+					<div class="col-md-12">
+						<h5>Email Notification</h5>
+						<p><a href="" data-toggle="modal" class="text_decor" data-target="#instanttModalForm">{{instant_actions.email_template}}</p>
+						<p></p>
+					</div>
+						<span class="rect_blk_line_save"></span>	<!-- <span class="scheduleAction_line"></span> -->											
+				</div>
+				<div class="text-center col-md-6 rect_box light_grey_bg" id="schedule_action">
+					<p><a href="" data-toggle="modal"  class="text_decor" data-target="#scheduleModalForm">Schedule actions</a></p>
+				</div>
+				<!-- <span class="scheduleAction_line"></span> -->
+			</div>
+		</div>
+	</div>
+	<form class="form-main1" action="/workflow/email-notification/{{rule.id}}/" method="POST">
+		<div class="modal fade" id="instanttModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<!--Content-->
+				<div class="modal-content form-elegant">
+					<!--Header-->
+					<div class="modal-header text-center">
+						<h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Email notifications</strong></h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<!--Body-->
+					<div class="modal-body mx-4">
+						<!--Body-->
+						<div class="md-form mb-5">
+							<span>Name</span>
+							<input type="text" id="name" name="name" class="form-control validate emailInputAction" value={{instant_actions.name}}>
+						</div>
+						<div class="md-form mb-5">
+							<span>Additional Recipients</span>
+							<input type="text" name="aditional_receipent" class="form-control validate emailInputAction" value={{instant_actions.additional_recipients}}>
+						</div>
+						<div class="md-form mb-5" style="margin-bottom: 0px !important;">
+							<div class="form-group">
+								<label>Email Template</label>
+								<select class="form-control emailInputAction" name="email_template" required="">
+									<option value="instant_actions.email_template">{{instant_actions.email_template}}</option>
+									{% for template in template %}
+									<option value="{{template.id}}">{{template.template_name}}</option>
+									{% endfor %}
+								</select>
+								<p class="text-right margin_top_2" style="margin-bottom: 0px !important;"> or <a href="/workflow/create-template/" target="_blank">Create new template here</a></p>
+							</div>
+						</div>
+						<div class="md-form mb-5">
+							<span>Send Email as</span>
+							<input type="email" name="send_as" class="form-control validate emailInputAction" value="{{instant_actions.send_as}}">
+						</div>
+						<div class="text-center mb-3">
+							<button type="submit" class="btn btn-warning blue-gradient btn-block btn-rounded z-depth-1a notificationButton">submit</button>
+						</div>
+					</div>
+				</div>
+				<!--/.Content-->
+			</div>
+		</div>
+	</form>
+	<form action="/workflow/email-schedule/{{rule.id}}/" method="POST">
+		<div class="modal fade" id="scheduleModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<!--Content-->
+				<div class="modal-content form-elegant">
+					<!--Header-->
+					<div class="modal-header text-center">
+						<h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Schedule Mail</strong></h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="container modal-body col-md-12 row notificationRowMargin">
+						<div class="col-md-2">
+							<h6>Execute</h6>
+						</div>
+						<div class="col-md-2">
+							<input type="number" name="hr_day_value" class="form-control inputScheduleActions" id="hr_day" required="" value={{schedule_actions.time}} >
+						</div>
+						<div class="col-md-4">
+							<select class="form-control inputScheduleActions" name="time_unit" id="unit_value" required="">
+								<option value="{{schedule_actions.time}}">{{schedule_actions.time_unit}}</option>
+								<option value="Minutes">Minutes</option>
+								<option value="Hours">Hours</option>
+								<option value="Days">Days</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<p>After rule Trigger Date</p>
+						</div>
+						<div class="col-md-12">
+							<select class="form-control inputScheduleActions" name="email_template" required="">
+								<option value="schedule_actions.email_template">{{schedule_actions.email_template}}</option>
+								{% for template in template %}
+								<option value="{{template.id}}">{{template.template_name}}</option>
+								{% endfor %}
+							</select>
+							<p class="text-right margin_top_2">or <a href="/workflow/create-template/" target="_blank">Create new template here</a></p>
+						</div>
+						<div class="col-md-12"  style="margin-bottom: 10px !important;">
+							<input type="submit" name="submit" value="Save" class="btn btn-warning save_btn_desgn notificationButton">
+						</div>
+					</div>
+				</div>
+				<!--/.Content-->
+			</div>
+		</div>
+	</form>	
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.add-more-btn').click(function() {
+			var clone = $('.form-block_1:first').clone();
+			$('#form-new').append(clone);
+		});
+
+	});
+	l = $('#rule_when_value').val()
+	if(l != 'None'){
+		$('span.when_line').addClass('next_line');
+	}
+	$('div').on('click', '.deleteRowRule', function() {
+    $(this).parents(".deleteRow").remove();
+	});
+
+    $('.span_edit').on('click', function(e){
+      e.preventDefault();
+      $('#myModal1').modal('show').find('.modal-content').load($(this).attr('href'));
+    });
+    $('.span_edit_delete').on('click', function(e){
+      e.preventDefault();
+      if(confirm('Are you sure you want to delete?')){
+      	return true;
+      }else{
+      	return false
+      }
+    });
+
+// $('#form22').hide();
+// $('.rule_id1').on('change', function(){
+// 	$('#form22').show();
+// });
+// $("#instant_action").hide();
+// $("#schedule_action").hide();
+
+// $('.next_step_btn').click(function(){
+// $("#instant_action").show();
+// $("#schedule_action").show();
+// });
+
+</script>
+<script src="{% static 'erp/js/jquery.ajax.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(".settings-subgroup").addClass("sub-group-active");
+        $(".workflow").addClass("menu-active");
+   });
+</script> 
+{% endblock %}

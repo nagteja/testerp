@@ -1,0 +1,79 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<body>
+
+	<div class="container">
+  <h2>Create Rule</h2>
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Create Rule
+  </button>
+<form  action="/workflow/" method="POST">
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Create New Rule</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+        	<label>Module</label>
+        	<select name="module">
+              <option >Select</option>
+            {% for module in module %}
+        		  <option value="{{module.module.module}}">{{module.module.module}}</option>
+            {% endfor %}
+        	</select><br>
+        	<label>Rule Name</label>
+        		<input type="text" name="rule_name"><br>
+        	<label>Description</label>
+        		<input type="text" name="description">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn">save</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="container">
+  <h2>Workflow</h2>           
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Module</th>
+        <th>Rule Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+          {% for createrule in createrule %}
+          <tr>
+          <td>{{createrule.module}}</td> 
+          <td><a href="/workflow/workflowsave/{{createrule.id}}">{{createrule.rule_name}}</a></td>
+          <td>{{createrule.description}}</td>
+         </tr>
+          {% endfor %}
+    </tbody>
+  </table>
+</div>
+  </form>
+</div>
+</script>
+{% endblock %}

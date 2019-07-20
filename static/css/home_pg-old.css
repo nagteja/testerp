@@ -1,0 +1,187 @@
+.login_color{
+	color: #fd7e14;
+	font-family: Helvetica;
+}
+.register_button{
+	background-color: #007bff;
+	color: #fff;
+	padding:2px 8px 2px 8px;
+	border-radius: 8px;
+}
+.image_cover{
+	background: url('../images/Hire-Faculty_new.jpg');
+	background-size: cover;
+	height: auto;
+	width:100%;
+	height: 400px;
+	text-align: center;
+	padding-top: 10%;
+	
+}
+.cover_button{
+	background-color: #fd7e14;	
+	width: 250px;
+	opacity: 1;
+	color:#fff;
+	font-size: 18px;
+	font-family: Helvetica;
+	padding:1 !important;
+	border-radius: 8px;
+
+}
+
+.cover_text{	
+	font-family: Helvetica;
+	/*font-style: normal;
+	font-weight: bold;*/
+	color:#fff;
+}
+.cover_text_p{	
+	font-family: Helvetica;	
+	font-weight: bold;
+	color:#fff;
+	font-size: 18px;
+}
+
+.main_heading{
+	background: #007bff;
+	text-align: center;
+	color: #fff;
+	padding-top: 2%;
+	padding-bottom: 2%;
+}
+
+.heading_align{
+	text-align:center;
+	color: #fd7e14;
+	font-family: Helvetica;
+	padding-top: 3%;
+	padding-bottom: 4%;	
+}
+
+.phone_img{
+	width: 95%;
+	height: 400px;
+}
+
+
+.text_padding_blk{
+	text-align: justify;
+	padding-left: 10%;
+	padding-top:2%;
+
+}
+.icon_padding_blk{
+	padding-top:2%;
+	padding-right:4%;
+}
+.icon_padding_blk_left{
+	padding-left:4%;
+	padding-top:2%;
+}
+.second_main_heading{	
+	text-align: center;
+	color: #fd7e14;
+	padding-top: 4%;
+	padding-bottom: 1%;
+}
+.p_text_align_center{
+	text-align: center;
+	font-size: 18px;
+	padding-left: 26%;
+	padding-right: 26%;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.dropdown_content li{
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.text_alignc{
+	text-align:center;
+	color:#6c757d;
+}
+.laptop_width{
+	width: 100%;
+}
+.laptop_text_align{
+	font-size: 17px;
+	padding-left: 8%;
+	padding-top: 2%;
+	text-align: justify;
+	padding-right: 2%;
+	padding-bottom: 2%;
+}
+
+.from_col2 {
+    columns: 2 auto;
+    column-gap: 30px;    
+    text-align: center;  
+    break-inside: avoid;
+}
+
+.reg_tab_half{
+	width: 48.5%;
+	display: inline-block;
+}
+
+.fname{
+	width:96%;
+	background-color: #ffffff;
+}
+.login_pass {
+    width: 96%;
+}
+.uname {
+    width: 96%;
+}
+.lname {
+    width: 96%;
+}
+.password{
+	width:96%;
+}
+.school{
+	width:96%;
+}
+.phone{
+	width:96%;
+}
+.reg_text_align_center{
+	text-align: center;
+	padding-top: 3%;
+}
+
+input{
+	padding-top: 5%;
+    background: transparent;
+    border: none;   
+    width: 350px;    
+    display:inline-flex;
+}
+.reg_button{
+	background-color: #007bff;
+	color: #fff;
+	padding:2px 10px 2px 10px;
+	border-radius: 8px;
+}
+.cancel_button{
+	background-color: black;
+	color: #fff;
+	padding:2px 12px 2px 12px;
+	border-radius: 8px;
+}

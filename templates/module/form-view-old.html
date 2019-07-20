@@ -1,0 +1,38 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+  <title>Form View</title>
+</head>
+<body>
+  <br><br><br><br>
+<div class="container">
+  <h2>User Details</h2>           
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Module</th>
+        <th>Form Name</th>
+        <th>User id</th>
+        <th>Revision</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for form_view in form_view %}
+        <tr>
+          <td>{{ form_view.module}}</td> 
+          <td><a href="/module/form-individual/{{form_view.id}}">{{ form_view.form_name }}</a></td>
+          <td>{{ form_view.user_id }}</td> 
+          <td>{{ form_view.revision }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
+
+
+{% endblock %}

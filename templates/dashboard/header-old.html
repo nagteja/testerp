@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<title>Admission</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <a href="#home" class="w3-bar-item w3-button">school serv</a>
+    <div class="w3-right w3-hide-small">
+      <a href="/accounts/roles" class="w3-bar-item w3-button">Roles</a>
+      <a href="/accounts/create-user" class="w3-bar-item w3-button">User</a>
+      <a href="/accounts/user-permission" class="w3-bar-item w3-button">user permission</a>
+      <a href="/module/dynamicforms/inquiries" class="w3-bar-item w3-button">Inquiries</a>
+      <a href="/module/dynamicforms/admissions" class="w3-bar-item w3-button">Admissions</a>
+      <a href="/module/list/" class="w3-bar-item w3-button">Form List</a>
+      <a href="/module/form-view/" class="w3-bar-item w3-button">Form view</a>
+      <a href="/workflow/" class="w3-bar-item w3-button">workflow</a>
+      <a href="/logout/" class="w3-bar-item w3-button">Logout</a>
+    </div>
+  </div>
+</div>
+<main>
+    {% block content %}
+    {% endblock %}
+  </main>
+<!-- Header -->
+
+
+<!-- Page content -->
+
+</body>
+</html>

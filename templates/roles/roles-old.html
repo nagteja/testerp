@@ -1,0 +1,74 @@
+{% extends 'dashboard/header.html' %}
+{% block content %}
+{% load staticfiles %}
+<div class="container">
+    <h2>User Details</h2>           
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>school</th>
+                <th>Roles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user_details in user_details %}
+            <tr>
+                <td>{{ user_details.user }}</td> 
+                <td>{{ user_details.user.email }}</td>
+                <td>{{ user_details.mobile }}</td>
+                <td>{{ user_details.school }}</td> 
+                <td>{{ user_details.user_role }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<button class="open-button" onclick="addRoles()">Add Roles</button>
+<div class="form-popup" id="myForm">
+    <form action="/accounts/roles/" method = "post" class="form-container">
+        <h1>Create Territory</h1>
+            <label for="name"><b>Territory Name</b></label>
+            <input type="text" placeholder="Enter Territory Name" name="territoryname" required>
+            <label for="parentterriority"><b>Parent Territory</b></label>
+            <div id="select_box"></div>
+            <button type="submit" class="btn">Add</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+</div>
+<script type="text/javascript">
+function addRoles() {
+      document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+        $('#parentterriority').ready(function(){
+            $.ajax({
+                    url: "/accounts/territory/",
+                    type: "GET",
+                    contentType: false,
+                    processData:false,
+                    success: function(data)
+                    {
+                        json = JSON.parse(data)  
+                        var html = '' 
+                        html += '<select name="parentterriority" id="parentterriority" class="form-container">'+
+                                '<option value="">select</option>';
+                        for(i=0;i<json.length;i++){
+                            html += '<option value="' + json[i]['fields']['roles']+ '">'+json[i]['fields']['roles']+'</option>';
+                        }        
+                        html += '</select>';
+                        $('#select_box').html(html);
+                    },
+                    error: function() 
+                    {
+
+                    }           
+            });
+        });
+</script>
+{% endblock %}

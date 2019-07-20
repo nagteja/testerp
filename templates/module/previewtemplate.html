@@ -1,0 +1,151 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+ <link href="{% static 'css/dynamicform_style.css' %}" rel="stylesheet">
+ 	<div class="breadcrumbs-area">
+        <h3>All Subjects</h3>
+        <ul>
+            <li>
+                <a href="../../../dashboard">Home</a>
+            </li>
+            <li>Create Enquiry Form</li>
+        </ul>
+    </div>
+	<div class="container preview1 form-preview1">
+		<form action="/dynamicforms/saveforms/" method="POST" enctype="multipart/form-data" class="preview1 ">
+			<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>			
+			<!-- <input type='file' onchange="readURL(this);" />
+    		<img id="blah" src="#" alt="your image" /> -->
+    		{% for i in display_form %}
+			<div id='form' class="col-12-md row content-box split centered"></div>
+			<script type="text/javascript">
+				var form_fields = {{ i.form_field|safe }};
+				$(document).ready(function(){    
+					html = '';
+					for(i=0;i<form_fields.length;i++){
+						var no_of_rows = form_fields.length/2;
+						var no_of_columns = 2;
+
+						var fields = form_fields[i].type
+						if(form_fields[i].type=='checkbox-group'){
+							var fields="checkbox";
+						}
+						if(form_fields[i].type=='radio-group'){
+							var fields="radio";
+						}	
+						if(form_fields[i].type=='header'){
+							html += '<div class="col-12-md col-12-sm widthdivCol"> <'+form_fields[i].subtype+'>'+form_fields[i].label+'</'+form_fields[i].subtype+'></div>'
+						}else if(form_fields[i].type=='checkbox-group'){
+							html += '<div class="col-6-md col-12-sm row checkBoxbgcolor widthdivSixCol"><div class="col-6-md col-12-sm widthdivCol"> <'+form_fields[i].subtype+'>'+form_fields[i].label+'</'+form_fields[i].subtype+'>'+ asterisk +'</div>'
+						}else if(form_fields[i].type=='radio-group'){
+							html += '<div class="col-6-md col-12-sm row checkBoxbgcolor widthdivSixCol"><div class="col-6-md col-12-sm widthdivCol"> <'+form_fields[i].subtype+'>'+form_fields[i].label+'</'+form_fields[i].subtype+'>'+ asterisk +' </div>'
+						}
+						else if(form_fields[i].type=='file'){
+							html += '<div class="col-6-md col-12-sm widthdivSixCol filebutton"><div class="col-6-md col-12-sm widthdivCol"> <'+form_fields[i].subtype+'>'+form_fields[i].label+'</'+form_fields[i].subtype+'>'+ asterisk +'</div>'
+						}/*else if(form_fields[i].type=='paragraph'){
+							html += '<div class="col-6-md col-12-sm widthdivSixCol"> <'+form_fields[i].subtype+' class="previewInput">'+form_fields[i].label+'</'+form_fields[i].subtype+'> </div>'
+						}else{
+							html += '<div class="form-group"><label for="'+form_fields[i].label+'">'+form_fields[i].label+'</label>'
+						}*/
+						if(form_fields[i].required){
+								requir = "required";
+								asterisk = ' *';
+							}else{
+								requir = "";
+								asterisk ="";
+							}
+
+						if(fields=='select'){
+							html +=	 '<div class="col-6-md col-12-sm widthdivSixCol"> <select class="previewInput styled-selec"  '+ requir +'name="'+form_fields[i].name+'" id="'+form_fields[i].name+'"><option value="">'+form_fields[i].label+ asterisk +'</option>';
+							for(j=0;j<form_fields[i].values.length;j++){
+								html += '<option value="'+form_fields[i].values[j].value+'">'+form_fields[i].values[j].label+'</option>'
+							}
+							html +=	'</select></div><br>';
+						}else if(form_fields[i].type=='checkbox-group' || form_fields[i].type=='radio-group' ){
+							for(j=0;j<form_fields[i].values.length;j++){
+								if(j==0){check = "checked";}else{check = "";}
+								html += '<br> '+ ' <input class="previewInputCheckbox" style="margin-left: 1%;" type="'+fields+'"  id="'+form_fields[i].values[j].value+'" '+ requir + check +' name="'+form_fields[i].name+'[]" value="'+j+'" ><label style="margin-right: 65px;">'+form_fields[i].values[j].value+'</label>';							
+							}
+							html +='</div>'
+						}else if(form_fields[i].type=='header' || form_fields[i].type=='paragraph'){
+							html += '';
+						}else if(form_fields[i].type=='textarea'){
+							html += '<div class="col-6-md col-12-sm  widthdivSixCol"> <'+form_fields[i].type+' name='+form_fields[i].name+' id="'+form_fields[i].name+'" placeholder="'+form_fields[i].label+ asterisk +'"'+ requir +' class="previewInput '+form_fields[i].className+'" ></'+form_fields[i].type+'></div>';
+						}else if(form_fields[i].type == 'file'){
+							html += '<div class="col-6-md col-12-sm widthdivSixCol"><input type="'+fields+'" '+ requir +' class="previewInput fileInputLoading '+form_fields[i].className+'" onchange="upload_file(this.id)" id="'+form_fields[i].name+'" ><input type="hidden"  class="'+form_fields[i].name+'"  name="'+form_fields[i].name+'"></div></div>';
+						}	else{
+							if(form_fields[i].subtype =="email"){
+								style1 = 'pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"';
+								
+							}else{
+								style1 = "";
+							}
+							if(form_fields[i].subtype =="tel" || form_fields[i].label == 'Ph' ||  form_fields[i].label == 'Mobile' ||  form_fields[i].label == 'Phone Number'||form_fields[i].label == 'Number'){
+								style2 = 'pattern="[0-9]{13}"';
+							}else{
+								style2 = "";
+							}
+							if(form_fields[i].label == 'Aadhar Number'){
+								style3 = 'pattern="[0-9]{12}"';
+							}else{
+								style3 = "";
+							}
+
+							html += '<div class="col-6-md col-12-sm widthdivSixCol"> <input type="'+fields+'" '+ requir +' class="previewInput '+form_fields[i].className+'" id="'+form_fields[i].name+'"  placeholder="'+form_fields[i].label+ asterisk +'"'+ style1+ style2 + style3 +' name="'+form_fields[i].name+'"></div></div>';
+							}
+						}
+						// html += '<br><input type="hidden" name="saved_form_details" id="results"><input type="text" name="school_id" value={{i.school_id}}><input type="text" name="user_id" value={{i.user_id}}><input type="text" name="revision" value={{i.revision}}><input type="submit" onclick="checking()" id="submit"></form></div></body></html>';
+
+						$('#form').html(html);
+						});
+				function checking(){
+					$('form').each(
+						function(index){  
+							var input = $(this).serializeArray() ;
+							alert(JSON.stringify(input))
+							$('#results').val(JSON.stringify(input));
+						});
+				}
+				function upload_file(e){
+								var form = new FormData();
+								form.append("image", document.getElementById(e).files[0]);
+								$.ajax({
+									url: "/dynamicforms/uploadforms/",
+									type: "POST",
+									data:  form,
+									contentType: false,
+									processData:false,
+									success: function(data)
+									{
+										base_url = '{{ request.get_host }}';
+										$("."+e).val("http://"+base_url+'/dynamicforms'+data);
+									},
+									error: function() 
+									{
+
+									} 	        
+								});
+				}
+			</script>
+			<!-- <input type="submit" onclick="checking()" id="submit"> -->
+			<!-- <script type="text/javascript">			
+			function myFunction() {
+				var a = document.getElementById("form").className ="content-box1";
+				}
+			function myFunction1() {			
+				document.getElementById("form").className ="content-box2";
+				}
+			function myFunction2() {			
+				document.getElementById("form").className ="content-box3";
+				}
+
+			</script> -->
+			{% endfor %}
+<script src="{% static 'js/ajax-jquery.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(".settings-subgroup").addClass("sub-group-active");
+        $(".allform").addClass("menu-active");
+   });
+</script>
+{% endblock %}

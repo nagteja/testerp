@@ -1,0 +1,117 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+<div class="dashboard-content-one">
+                <!-- Breadcubs Area Start Here -->
+                <div class="breadcrumbs-area">
+                    <h3>Teacher</h3>
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>School Profile</li>
+                    </ul>
+                </div>
+                <div class="card height-auto">
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                            </div>
+                        </div>
+                        <div class="col-md-12 container-fluid single-info-details schoolProfileContainer"  style="margin-right: 0px !important;">
+                            <div class="item-img">
+                                <img class="imgSizewidth imgBorerDisplay" src="{{school_check.0.school_images}}/">
+                            </div>
+                            <div class="item-content">
+                                <div class="header-inline item-header">
+                                    <h3 class="text-dark-medium font-medium">{{sch_dl.school}}</h3>
+                                    <div class="header-elements">
+                                        <ul>
+                                            <li><a href="/accounts/school-profile-edit/"><i class="far fa-edit"></i></a></li>
+                                            <!-- <li><a href="#"><i class="fas fa-print"></i></a></li>
+                                            <li><a href="#"><i class="fas fa-download"></i></a></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p style="padding-left: 5px;">{{school_check.0.description}}</p>
+                                <div class="padTable info-table table-responsive">
+                                    <table class="table text-nowrap table-striped table-condensed" style="margin-left: 10px;">
+                                        <tbody>
+                                            <tr class="schooltd">
+                                                <td>Trust/Society</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">{{school_check.0.trust}}</td>
+                                            </tr>
+                                            <tr class="schooltd">
+                                                <td>Website</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">{{school_check.0.website}}</td>
+                                            </tr>
+                                            <tr class="schooltd">
+                                                <td>School Type</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">{{school_check.0.school_type}}</td>
+                                            </tr>
+                                            <tr class="schooltd">
+                                                <td>Medium of Instruction</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">{{school_check.0.medium}}</td>
+                                            </tr>
+                                            <tr class="schooltd">
+                                                <td>Grade From</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">{{school_check.0.grade_from}}</td>
+                                            </tr>
+                                            <tr class="schooltd">
+                                                <td>Grade To</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">{{school_check.0.grade_to}}</td>
+                                            </tr>
+                                            <tr class="schooltd">
+                                                <td>School Landline</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">{{school_check.0.landline}}</td>
+                                            </tr>
+                                            <tr class="schooltd">
+                                                <td>School Address</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">
+                                                {{school_check.0.address }}</td>
+                                            </tr>
+                                             <tr class="schooltd">
+                                                <td>Country</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">
+                                                {{school_check.0.country}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>State</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">{{school_check.0.state}}</td>
+                                            </tr>
+                                            <tr class="schooltd">
+                                                <td>City</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">{{school_check.0.city}}</td>
+                                            </tr>                                      
+                                            <tr class="schooltd">
+                                                <td>Pincode</td>
+                                                <td>:</td>
+                                                <td class="font-medium text-dark-medium">{{school_check.0.pin}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>
+<script src="{% static 'js/ajax-jquery.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".settings-subgroup").addClass("sub-group-active");
+        $(".school-profile").addClass("menu-active");
+    });
+</script>
+{% endblock %}

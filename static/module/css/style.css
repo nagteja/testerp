@@ -1,0 +1,344 @@
+.container{
+    margin : 10px auto;
+    background: #602a7c;
+}
+}
+html{
+   margin :22px;
+   padding : 10px;
+}
+/*body {
+  padding: 0;
+  margin: 15px;
+  background: #602a7c;
+  margin :22px;
+}*/
+
+table, th, td {
+    border: 1px solid black;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+      padding: 15px;
+      text-align: left;
+      color:orange;
+}
+
+body {
+      padding: 0;
+      margin: 22px;
+      /*background: #602a7c;*/
+    }
+
+header{
+      background: #602a7c;
+      padding : 10px;
+      color : white;
+}
+form{
+    background: #602a7c;
+    padding : 10px;
+}
+#main-menu {
+    background: #602a7c;
+    color:orange;
+}
+
+.setDataWrap {
+    text-align: center;
+     margin-bottom: 10px;
+}
+.language-selector li {
+    text-align: center;
+    margin: 0 0 20px;
+    padding: 0;
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+    background: white;
+    margin: 0;
+    line-height: 18px;
+   }
+#form_name{
+    padding: 4px;
+    line-height: 18px;
+    margin-top: 20px;
+    margin-right: 0px;}
+
+#getJSON{
+    background-color: #8f12a5;
+    color: white;
+    padding:10px;
+    font-size: 1em;
+    margin: 5px;
+}
+
+#form_name_error{
+    color:orange;
+}
+
+#header1{
+    color:#602a7c;
+    font-size: 25px;
+}
+.footer{
+    list-style-type:none;
+    text-decoration:none;
+    text-align:center;
+    color:orange;
+}
+/*.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 0.5;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+}*/
+ul{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.split-menu {
+    height: 100%;
+    width: 15em;
+    position: fixed;
+    z-index: 0.5 !important;
+    /*-webkit-transform: translateZ(0.5);*/
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 40px;
+    text-align: left;
+    margin-right: 20px;
+}
+
+.body-preview{
+    /*background: orange;*/
+
+}
+.preview1{
+    background: #808080;
+    opacity: 0.95;
+  
+}
+
+.form-preview1{
+    border-radius: 12px 12px;
+}
+.content-box {
+    /*columns: 3 auto;*/
+    /*column-count: auto;
+    column-width: 8rem;*/
+    column-gap: 30px;
+    /*column-rule: thick inset black;
+    text-align: justify;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;*/
+    /*widows: 30;*/
+    /*break-after: avoid;
+    break-before: page;*/
+    /*column-fill: balance; */ 
+    /*column-fill: auto;*/
+}
+
+.content-box-display {
+    columns: 2 auto;
+    /*column-count: auto;
+    column-width: 8rem;*/
+    column-gap: 30px;
+    column-rule: thin inset black;
+    text-align: justify;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    /*widows: 30;*/
+    /*break-after: avoid;
+    break-before: page;*/
+    /*column-fill: balance; */ 
+    /*column-fill: auto;*/
+}
+
+.content-box1 {
+    columns: 1 auto;
+    column-count: auto;
+    /*column-width: 8rem;*/
+    column-gap: 30px;
+    text-align: justify;
+    /*width: 720px;
+    padding-left: 3em;*/
+    
+}
+.content-box2 {
+    columns: 2 auto;
+    column-gap: 30px;
+    column-rule: thin inset black;
+    text-align: justify;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.content-box3 {
+    columns: 3 auto;
+    column-gap: 30px;
+    column-rule: thin inset black;
+    text-align: justify;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+
+/*.smartphone {
+    position: relative;
+    width: 360px;
+    height: 640px;
+    margin: auto;
+    border: 16px black solid;
+    border-top-width: 60px;
+    border-bottom-width: 60px;
+    border-radius: 36px;
+    max-width:480px
+}*/
+.parallax {
+    background-image: url('Hire-Faculty_new.jpg');
+    min-height: 500px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media only screen and (max-width:480px){
+.content-box {
+    columns: 1 auto;
+ }
+}
+@media only screen and (min-width:481px) and (max-width:640px){
+.content-box {
+    columns: 2 auto;}
+}
+@media only screen and (min-width:641px) and (max-width:767px){
+.content-box {
+    columns: 3 auto;}
+}
+
+.button-radius{
+  text-align: center;
+  width: 6em;
+  border-radius: 12px 4px;
+  font-size: 16px;
+  padding:2px;
+  color:#CA09EC;
+}
+textarea{
+    margin-bottom: 1em;
+    max-width: 500px; 
+    max-height: 500px;
+}
+
+
+label {
+  /*font : 1em "handwriting", sans-serif;*/
+    padding-right: 5px;
+}
+
+input[type=text] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    color:white;    
+    width: 350px;    
+    display:inline-flex;
+}
+input[type=date] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    color:white;
+    width: 350px;
+    display:inline-flex;
+}
+input[type=number] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    color:white;
+    width: 350px;
+    display:inline-flex;
+}
+input[type=file] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    color:white;
+    width: 350px;
+    display:inline-flex;
+}
+
+.styled-select select {
+   background: transparent;
+   width: 282px;
+   padding: 5px;
+   font-size: 15px;
+   line-height: 1;
+   border: 1;
+   border-radius: 12px 4px;
+   height: 34px;
+   color:#9C9C9C; 
+   margin-left: 1px;  
+}
+
+input[type=password] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    color:white;
+    width: 350px;
+    display:inline-flex;
+}
+input[type=email] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    color:white;
+    width: 350px;
+    display:inline-flex;
+}
+
+.ul-database{
+    list-style-type: none;
+    
+}
+a {
+    text-decoration: none;
+}
+
+/*li.form-field{
+    width:47%;
+    margin-right:3%;
+    display:inline-block;
+}*/
+
+li.form-field:not( [data-type="control_button"] ){
+
+    width: 49%;
+    margin-right:1%;
+    display: inline-block;
+
+}
+
+

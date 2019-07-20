@@ -1,0 +1,36 @@
+{% extends 'dashboard/header.html' %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+  <title>Form List</title>
+</head>
+<body>
+  <br><br><br><br>
+<div class="container">
+  <h2>User Details</h2>           
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Module</th>
+        <th>Form Name</th>
+        <th>Revision</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for listform in listform %}
+        <tr>
+          <td>{{ listform.module.module }}</td> 
+          <td><a href="/module/listformview/{{listform.id}}">{{ listform.form_name }}</a></td>
+          <td>{{ listform.revision }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
+
+
+{% endblock %}

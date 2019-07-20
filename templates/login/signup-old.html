@@ -1,0 +1,122 @@
+{% extends 'login/base.html' %}
+
+{% block content %}
+  <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="container"><!-- 
+    {{form.as_p}} -->
+    <label for="uname"><b>first name</b></label>
+    <input type="text" placeholder="Enter Username" name="first_name" >
+    
+    <label for="uname"><b>Last name</b></label>
+    <input type="text" placeholder="Enter Username" name="last_name" >
+    {{form.errors.last_name}}
+    <br><br>
+    <label for="uname"><b>Email</b></label>
+    <input type="email" placeholder="Enter Username" name="email" id="id_email" required>
+    {{form.errors.email}}
+	<span id="email_error">email id already exist</span>
+    <br><br>
+    <label for="uname"><b>mobile</b></label>
+    <input type="number" pattern="[0-9]+" onKeyPress="if(this.value.length==13) return false;" placeholder="Enter mobile" name="mobile" id="id_mobile"  required>
+    {{form.errors.mobile}}
+    <span id="mobile_error">Mobile number already exist</span>
+    <br><br>
+    <label for="uname"><b>School</b></label>
+    <input type="name" placeholder="Enter school" name="school" id="id_school" required>
+    {{form.errors.school}}
+	<span id="school_error">school is  already exist</span>
+    <br><br>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password1" id="id_password1" required><br><br>
+    <label for="psw"><b>Password Confirmation</b></label>
+    <input type="password" placeholder="Enter Password" name="password2" id="id_password2" required><br><br>
+  </div>
+
+    <button type="submit" id="signup">Sign up</button>
+  </form>
+  <script type="text/javascript">
+  $("#mobile_error").hide();
+  $("#uname_error").hide();
+  $("#email_error").hide();
+  $("#school_error").hide();
+		$('#id_mobile').change(function(){
+			var form = new FormData();
+			form.append("mobile", $('#id_mobile').val());
+			$.ajax({
+					url: "/accounts/mobilevalidation/",
+					type: "POST",
+					data: form, 
+					contentType: false,
+					processData:false,
+					success: function(data)
+					{
+						if(data=="yes"){
+							$("#mobile_error").show();
+							$("#signup").hide();
+							return false;
+						}else{
+							$("#mobile_error").hide();
+							$("#signup").show();
+						}
+					},
+					error: function() 
+					{
+
+					} 	        
+				});
+			});
+		$('#id_email').change(function(){
+			var form = new FormData();
+			form.append("email", $('#id_email').val());
+			$.ajax({
+					url: "/accounts/emailvalidation/",
+					type: "POST",
+					data: form, 
+					contentType: false,
+					processData:false,
+					success: function(data)
+					{
+						if(data=="yes"){
+							$("#email_error").show();
+							return false;
+						}else{
+							$("#email_error").hide();
+						}
+
+					},
+					error: function() 
+					{
+
+					} 	        
+				});
+			});
+		$('#id_school').change(function(){
+			var form = new FormData();
+			form.append("school", $('#id_school').val());
+			$.ajax({
+					url: "/accounts/schoolvalidation/",
+					type: "POST",
+					data: form, 
+					contentType: false,
+					processData:false,
+					success: function(data)
+					{
+						if(data=="yes"){
+							$("#school_error").show();
+							return false;
+						}else{
+							$("#school_error").hide();
+						}
+
+					},
+					error: function() 
+					{
+
+					} 	        
+				});
+			});
+</script>
+{% endblock %}
+
